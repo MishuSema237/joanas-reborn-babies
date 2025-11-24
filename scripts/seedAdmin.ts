@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import AdminUser from "../lib/models/AdminUser.ts";
+import AdminUser from "../lib/models/AdminUser";
 import dotenv from "dotenv";
 import path from "path";
 
