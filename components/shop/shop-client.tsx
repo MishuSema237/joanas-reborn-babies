@@ -63,7 +63,7 @@ export function ShopClient({ initialProducts }: ShopClientProps) {
     }, [initialProducts, searchQuery, priceRange, sortOption]);
 
     return (
-        <div className="w-full max-w-viewport mx-auto px-4 py-12">
+        <div className="w-full max-w-viewport mx-auto">
             <h1 className="text-center text-4xl md:text-5xl font-serif mb-4 text-gray-900">
                 Our Collection
             </h1>
