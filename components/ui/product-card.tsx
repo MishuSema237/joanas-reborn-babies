@@ -29,29 +29,29 @@ export function ProductCard({
         </svg>
       </button>
 
-      {/* Product Image */}
-      <div className="absolute inset-0 top-0 bottom-32 z-10 flex items-center justify-center p-6">
+      {/* Product Image - Full Height Background */}
+      <div className="absolute inset-0 z-10">
         <Link href={`/product/${slug}`} className="relative w-full h-full block">
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={name}
               fill
-              className="object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-110"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400">
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
               No Image
             </div>
           )}
         </Link>
       </div>
 
-      {/* Content Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-md z-20 p-6 flex flex-col justify-end">
+      {/* Content Overlay - Pink Tinted Blur */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-pink-900/80 via-pink-800/40 to-transparent backdrop-blur-[2px] z-20 p-6 flex flex-col justify-end">
         <Link href={`/product/${slug}`} className="block">
-          <h3 className="text-xl font-bold text-white drop-shadow-md mb-1 truncate">{name}</h3>
-          <p className="text-white/90 text-sm mb-4 line-clamp-2 drop-shadow-sm">
+          <h3 className="text-2xl font-black text-white drop-shadow-md mb-1 truncate tracking-wide">{name}</h3>
+          <p className="text-white/90 text-sm mb-4 line-clamp-2 drop-shadow-sm font-medium">
             Handcrafted silicone reborn baby with lifelike details.
           </p>
         </Link>
@@ -62,9 +62,9 @@ export function ProductCard({
           </span>
           <Button
             href={`/product/${slug}`}
-            className="bg-white text-gray-900 hover:bg-gray-50 border-none rounded-full px-6 py-2 h-10 font-semibold shadow-lg flex items-center gap-2 text-sm"
+            className="bg-white/90 hover:bg-white text-pink-900 border-none rounded-full px-5 py-2 h-10 font-bold shadow-lg flex items-center gap-2 text-sm backdrop-blur-sm transition-all hover:scale-105"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
             Add to Cart
