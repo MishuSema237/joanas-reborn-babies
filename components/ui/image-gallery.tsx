@@ -39,7 +39,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
       </div>
 
       {/* Thumbnail Gallery */}
-      <div className="flex gap-4 overflow-x-auto pb-6">
+      <div className="flex gap-4 overflow-x-auto p-2">
         {displayImages.map((image, index) => (
           <button
             key={index}
