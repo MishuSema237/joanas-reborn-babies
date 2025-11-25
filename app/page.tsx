@@ -81,7 +81,7 @@ export default function Home() {
               Discover our handcrafted silicone reborn babies, designed with passion and precision to bring warmth and life to your home.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+            <div className="flex flex-row items-center gap-4 justify-center md:justify-start">
               <Button href="/shop" size="lg" className="bg-pink-600 text-white hover:bg-pink-700 border-none px-8 py-6 text-lg font-bold rounded-full min-w-[160px] shadow-lg shadow-pink-600/20">
                 Shop Now
               </Button>
