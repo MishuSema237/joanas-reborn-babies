@@ -54,7 +54,7 @@ export function ProductGrid({
         <div className="md:hidden">
           {mobileLayout === "carousel" ? (
             /* Horizontal Scroll (Carousel) */
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 scrollbar-hide">
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 scrollbar-hide">
               {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
                 <div key={product._id || product.id} className="snap-center shrink-0 w-[85vw] sm:w-[300px]">
                   <ProductCard
