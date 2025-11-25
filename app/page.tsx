@@ -63,7 +63,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
         </div>
 
-        <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col md:flex-row items-center gap-12 h-full pt-20 md:pt-0">
+        <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col md:flex-row items-center gap-12 h-full  md:pt-0">
           {/* Left Content */}
           <div className="flex-1 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
@@ -77,15 +77,15 @@ export default function Home() {
               world of joy.
             </h1>
 
-            <p className="text-lg text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto md:mx-0 drop-shadow-md">
+            <p className="text-lg text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto md:mx-0 drop-shadow-md px-6">
               Discover our handcrafted silicone reborn babies, designed with passion and precision to bring warmth and life to your home.
             </p>
 
-            <div className="flex flex-row items-center gap-4 justify-center md:justify-start">
-              <Button href="/shop" size="lg" className="bg-pink-600 text-white hover:bg-pink-700 border-none px-8 py-6 text-lg font-bold rounded-full min-w-[160px] shadow-lg shadow-pink-600/20">
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start mt-6">
+              <Button href="/shop" size="lg" className="bg-pink-600 text-white hover:bg-pink-700 border-none  text-lg font-bold rounded-full min-w-[160px] shadow-lg shadow-pink-600/20">
                 Shop Now
               </Button>
-              <Button href="/gallery" variant="outline" size="lg" className="border-white/30 text-pink-600 hover:bg-white/10 px-8 py-6 text-lg font-medium rounded-full min-w-[160px] backdrop-blur-sm">
+              <Button href="/gallery" variant="outline" size="lg" className="border-white/30 text-pink-600 hover:bg-white/10  text-lg font-medium rounded-full min-w-[160px] backdrop-blur-sm">
                 View Gallery
               </Button>
             </div>
