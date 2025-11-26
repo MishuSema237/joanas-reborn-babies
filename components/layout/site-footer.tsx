@@ -49,7 +49,7 @@ export function SiteFooter() {
           </p>
           <div className="flex gap-4 pt-4">
             {socials.map((social) => (
-              <Link
+              <a
                 key={social._id}
                 href={social.url}
                 target="_blank"
@@ -57,8 +57,15 @@ export function SiteFooter() {
                 aria-label={social.platform}
                 className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-pink-500 hover:bg-pink-600 hover:text-white transition-all duration-300"
               >
-                {iconMap[social.icon] || <FaFacebookF />}
-              </Link>
+                {social.svgContent ? (
+                  <div
+                    className="w-5 h-5 fill-current"
+                    dangerouslySetInnerHTML={{ __html: social.svgContent }}
+                  />
+                ) : (
+                  iconMap[social.icon] || <span className="text-xs">{social.platform[0]}</span>
+                )}
+              </a>
             ))}
           </div>
         </div>

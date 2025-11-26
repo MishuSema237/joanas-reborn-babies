@@ -11,8 +11,12 @@ const SocialMediaSchema = new mongoose.Schema(
             required: [true, "URL is required"],
         },
         icon: {
-            type: String, // Store icon name (e.g., "FaFacebook")
-            required: [true, "Icon name is required"],
+            type: String, // Store icon name (e.g., "FaFacebook") - Keeping for backward compatibility or alternative
+            required: false,
+        },
+        svgContent: {
+            type: String,
+            required: false, // Optional if they use icon, but we'll prioritize this in UI
         },
         active: {
             type: Boolean,

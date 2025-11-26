@@ -141,3 +141,50 @@ button:hover {
   background: #f5a5bd;
   color: #000000;
 }
+
+@media print {
+
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #db2777 !important;
+    /* pink-600 */
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:text-left {
+    text-align: left !important;
+  }
+
+  .print\:max-w-none {
+    max-width: none !important;
+  }
+
+  /* Add pink borders to sections if needed */
+  .border-gray-300 {
+    border-color: #fbcfe8 !important;
+    /* pink-200 */
+  }
+}

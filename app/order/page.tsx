@@ -332,13 +332,13 @@ export default function OrderPage() {
                     onChange={handleChange}
                     className="w-4 h-4 text-pink-600 border-gray-300 focus:ring-pink-500"
                   />
-                  <label htmlFor={method.name} className="ml-3 flex items-center gap-3 cursor-pointer">
+                  <label style={{ display: "flex" }} htmlFor={method.name} className="ml-3 flex-row items-center gap-3 cursor-pointer">
                     {method.logoUrl && (
                       <div className="w-8 h-8 relative rounded-md overflow-hidden border border-gray-200">
                         <Image src={method.logoUrl} alt={method.name} fill className="object-cover" />
                       </div>
                     )}
-                    <span className="text-gray-900 font-medium">{method.name}</span>
+                    <div className="text-gray-900 font-medium font-semibold">{method.name}</div>
                   </label>
                 </div>
               ))}
@@ -417,12 +417,26 @@ export default function OrderPage() {
               </Button>
 
               {/* Trust Badges */}
-              <div className="flex justify-center gap-4 mt-6">
-                <div className="w-20 h-6 bg-gray-300 flex items-center justify-center text-xs text-gray-500">
-                  Secure
+              <div className="flex justify-center items-center gap-6 mt-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="relative h-8 w-24">
+                    <Image
+                      src="/assets/fortinet logo.png"
+                      alt="Fortinet Secured"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-                <div className="w-20 h-6 bg-gray-300 flex items-center justify-center text-xs text-gray-500">
-                  Trusted
+                <div className="flex flex-col items-center gap-1">
+                  <div className="relative h-8 w-24">
+                    <Image
+                      src="/assets/cloudflare logo.png"
+                      alt="Cloudflare Protected"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

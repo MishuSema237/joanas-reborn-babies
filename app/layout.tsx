@@ -5,6 +5,7 @@ import SiteHeader from "@/components/layout/site-header";
 import { BackToTop } from "@/components/layout/back-to-top";
 import { CartProvider } from "@/lib/context/cart-context";
 import { MainContent } from "@/components/layout/main-content";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const bodyFont = Inter({
@@ -20,9 +21,9 @@ const displayFont = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Reborn Babies Studio",
+  title: "Joanna's Reborns",
   description:
-    "Handcrafted silicone reborn babies offering comfort, healing, and collection-worthy artistry.",
+    "Handcrafted with love to bring comfort, relief, and healing to hearts grieving the loss of a child or seeking companionship.",
 };
 
 export default function RootLayout({
@@ -44,6 +45,7 @@ export default function RootLayout({
             <SiteFooter />
           </div>
           <BackToTop />
+          <Toaster position="bottom-right" />
         </CartProvider>
       </body>
     </html>

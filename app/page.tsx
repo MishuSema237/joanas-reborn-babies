@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <div className="w-full">
       {/* Hero Section - Syngri Style */}
-      <section className="relative w-full min-h-screen bg-[#050505] text-white overflow-hidden flex items-center">
+      <section className="relative w-full min-h-screen bg-[#050505] text-white overflow-hidden flex items-center mb-4">
         {/* Abstract Background Elements */}
         <div className="absolute top-0 right-0 w-3/4 h-full bg-gradient-to-l from-purple-900/20 via-transparent to-transparent pointer-events-none" />
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-pink-600/20 rounded-full blur-3xl pointer-events-none" />
@@ -77,7 +77,7 @@ export default function Home() {
               world of joy.
             </h1>
 
-            <p className="text-lg text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto md:mx-0 drop-shadow-md px-6">
+            <p className="text-lg text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto md:mx-0 drop-shadow-md">
               Discover our handcrafted silicone reborn babies, designed with passion and precision to bring warmth and life to your home.
             </p>
 

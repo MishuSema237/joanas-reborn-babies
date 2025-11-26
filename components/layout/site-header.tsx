@@ -53,7 +53,7 @@ export default function SiteHeader() {
   return (
     <header className={`h-[60px] flex justify-between items-center px-6 z-50 transition-all duration-300 ${positionClass} ${headerBg} ${borderColor} border-b`}>
       <Link href="/" className={`text-2xl font-bold no-underline hover:no-underline z-20 ${textColor}`}>
-        REBORN BABIES
+        JOANNA'S REBORNS
       </Link>
 
       {/* Desktop Navigation */}

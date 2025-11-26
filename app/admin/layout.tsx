@@ -38,6 +38,27 @@ export default function AdminLayout({
         setIsLoading(false);
     }, [pathname, router, isLoginPage]);
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const sidebar = document.getElementById('mobile-sidebar');
+            const toggleButton = document.getElementById('mobile-menu-button');
+
+            // Only apply on mobile (when sidebar is fixed/absolute)
+            if (window.innerWidth >= 768) return;
+
+            if (sidebar && !sidebar.classList.contains('hidden') &&
+                !sidebar.contains(event.target as Node) &&
+                (!toggleButton || !toggleButton.contains(event.target as Node))) {
+                sidebar.classList.add('hidden');
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem("adminToken");
         router.push("/admin/login");
@@ -64,13 +85,13 @@ export default function AdminLayout({
             {/* Mobile Header */}
             <div className="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 z-20 flex justify-between items-center">
                 <h2 className="text-xl font-serif font-bold text-pink-600">Reborn Admin</h2>
-                <Button variant="ghost" size="icon" onClick={() => document.getElementById('mobile-sidebar')?.classList.toggle('hidden')}>
+                <Button id="mobile-menu-button" variant="ghost" size="icon" onClick={() => document.getElementById('mobile-sidebar')?.classList.toggle('hidden')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </Button>
             </div>
 
             {/* Sidebar */}
-            <aside id="mobile-sidebar" className="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full overflow-y-auto z-10 top-16 md:top-0 transition-transform">
+            <aside id="mobile-sidebar" className="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full overflow-y-auto z-10 top-16 md:top-0 transition-transform shadow-lg md:shadow-none">
                 <div className="p-6 border-b border-gray-100 hidden md:block">
                     <h2 className="text-2xl font-serif font-bold text-pink-600">Reborn Admin</h2>
                 </div>
@@ -132,6 +153,15 @@ export default function AdminLayout({
                     <div className="pt-4 pb-2">
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Settings</p>
                     </div>
+                    <Link
+                        href="/admin/socials"
+                        className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/socials")
+                            ? "bg-pink-50 text-pink-600"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                            }`}
+                    >
+                        Social Media
+                    </Link>
                     <Link
                         href="/admin/payment-methods"
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/payment-methods")

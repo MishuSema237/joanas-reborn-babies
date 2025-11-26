@@ -20,9 +20,9 @@ export async function POST(request: Request) {
         await connectMongoose();
         const body = await request.json();
 
-        if (!body.platform || !body.url || !body.icon) {
+        if (!body.platform || !body.url || (!body.icon && !body.svgContent)) {
             return NextResponse.json(
-                { error: "Platform, URL, and Icon are required" },
+                { error: "Platform, URL, and either Icon or SVG Content are required" },
                 { status: 400 }
             );
         }

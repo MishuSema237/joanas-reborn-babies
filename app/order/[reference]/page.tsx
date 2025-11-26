@@ -126,10 +126,6 @@ export default async function OrderConfirmationPage({
             Return Home
           </Button>
         </div>
-
-        <p className="text-sm text-gray-500 mt-8">
-          A confirmation email has been sent to {order.customer.email}
-        </p>
       </div>
     </div>
   );

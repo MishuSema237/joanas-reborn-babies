@@ -2,31 +2,31 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/admin/data-table";
-import { Modal } from "@/components/ui/modal";
-import { FormInput } from "@/components/ui/form-input";
-import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { FormInput, FormTextarea } from "@/components/ui/form-input";
+import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
+import Image from "next/image";
 
-export default function ManageSocialsPage() {
-    const [socials, setSocials] = useState<any[]>([]);
+interface SocialMedia {
+    _id: string;
+    platform: string;
+    url: string;
+    icon?: string;
+    svgContent?: string;
+    active: boolean;
+}
+
+export default function AdminSocialsPage() {
+    const [socials, setSocials] = useState<SocialMedia[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [editingSocial, setEditingSocial] = useState<any | null>(null);
-
-    // Form State
-    const [platform, setPlatform] = useState("");
-    const [url, setUrl] = useState("");
-    const [icon, setIcon] = useState("FaFacebook"); // Default
-    const [active, setActive] = useState(true);
-
-    const iconOptions = [
-        { label: "Facebook", value: "FaFacebook" },
-        { label: "Instagram", value: "FaInstagram" },
-        { label: "Twitter/X", value: "FaTwitter" },
-        { label: "TikTok", value: "FaTiktok" },
-        { label: "Pinterest", value: "FaPinterest" },
-        { label: "YouTube", value: "FaYoutube" },
-    ];
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [editingId, setEditingId] = useState<string | null>(null);
+    const [formData, setFormData] = useState({
+        platform: "",
+        url: "",
+        icon: "",
+        svgContent: "",
+    });
+    const [error, setError] = useState("");
 
     useEffect(() => {
         fetchSocials();
@@ -46,17 +46,57 @@ export default function ManageSocialsPage() {
         }
     };
 
-    const handleEdit = (social: any) => {
-        setEditingSocial(social);
-        setPlatform(social.platform);
-        setUrl(social.url);
-        setIcon(social.icon);
-        setActive(social.active);
-        setIsModalOpen(true);
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError("");
+
+        try {
+            const url = editingId
+                ? `/api/admin/socials?id=${editingId}`
+                : "/api/admin/socials";
+            const method = editingId ? "PUT" : "POST";
+
+            const res = await fetch(url, {
+                method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || "Failed to save social media");
+            }
+
+            await fetchSocials();
+            resetForm();
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleEdit = (social: SocialMedia) => {
+        setEditingId(social._id);
+        setFormData({
+            platform: social.platform,
+            url: social.url,
+            icon: social.icon || "",
+            svgContent: social.svgContent || "",
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Are you sure you want to delete this social link?")) return;
+        if (!confirm("Are you sure you want to delete this social media link?")) return;
 
         try {
             const res = await fetch(`/api/admin/socials?id=${id}`, {
@@ -64,181 +104,159 @@ export default function ManageSocialsPage() {
             });
 
             if (res.ok) {
-                setSocials(socials.filter((s) => s._id !== id));
-            } else {
-                alert("Failed to delete social link");
-            }
-        } catch (error) {
-            console.error("Error deleting social link:", error);
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const payload = {
-            platform,
-            url,
-            icon,
-            active,
-        };
-
-        try {
-            const url = editingSocial
-                ? `/api/admin/socials?id=${editingSocial._id}`
-                : "/api/admin/socials";
-
-            const method = editingSocial ? "PUT" : "POST";
-
-            const res = await fetch(url, {
-                method,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
-
-            if (res.ok) {
                 fetchSocials();
-                setIsModalOpen(false);
-                resetForm();
-            } else {
-                const error = await res.json();
-                alert(error.error || "Failed to save social link");
             }
         } catch (error) {
-            console.error("Error saving social link:", error);
+            console.error("Failed to delete social:", error);
         }
     };
 
     const resetForm = () => {
-        setEditingSocial(null);
-        setPlatform("");
-        setUrl("");
-        setIcon("FaFacebook");
-        setActive(true);
+        setEditingId(null);
+        setFormData({ platform: "", url: "", icon: "", svgContent: "" });
+        setError("");
     };
 
-    const columns = [
-        { header: "Platform", accessor: (row: any) => row.platform },
-        { header: "URL", accessor: (row: any) => row.url },
-        {
-            header: "Status",
-            accessor: (row: any) => (
-                <span
-                    className={`px-2 py-1 rounded-full text-xs ${row.active ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-                        }`}
-                >
-                    {row.active ? "Active" : "Inactive"}
-                </span>
-            ),
-        },
-        {
-            header: "Actions",
-            accessor: (row: any) => (
-                <div className="flex gap-2 justify-end">
-                    <button
-                        onClick={() => handleEdit(row)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
-                    >
-                        <FaEdit />
-                    </button>
-                    <button
-                        onClick={() => handleDelete(row._id)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors"
-                    >
-                        <FaTrash />
-                    </button>
-                </div>
-            ),
-        },
-    ];
-
     return (
-        <div>
-            <div className="flex justify-between items-center mb-8">
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Social Media</h1>
-                    <p className="text-gray-500">Manage social media links</p>
-                </div>
-                <Button
-                    onClick={() => {
-                        resetForm();
-                        setIsModalOpen(true);
-                    }}
-                >
-                    <FaPlus className="mr-2" /> Add Social
-                </Button>
-            </div>
+        <div className="p-6">
+            <h1 className="text-2xl font-bold mb-6">Manage Social Media</h1>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <DataTable columns={columns} data={socials} isLoading={isLoading} keyField="_id" />
-            </div>
+            {/* Form */}
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
+                <h2 className="text-lg font-semibold mb-4">
+                    {editingId ? "Edit Social Media" : "Add New Social Media"}
+                </h2>
 
-            <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                title={editingSocial ? "Edit Social Link" : "Add Social Link"}
-            >
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <FormInput
-                        label="Platform Name"
-                        value={platform}
-                        onChange={(e) => setPlatform(e.target.value)}
-                        placeholder="e.g., Facebook"
-                        required
-                    />
-
-                    <FormInput
-                        label="URL"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        placeholder="https://..."
-                        required
-                    />
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Icon
-                        </label>
-                        <select
-                            value={icon}
-                            onChange={(e) => setIcon(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all"
-                        >
-                            {iconOptions.map((opt) => (
-                                <option key={opt.value} value={opt.value}>
-                                    {opt.label}
-                                </option>
-                            ))}
-                        </select>
+                {error && (
+                    <div className="bg-red-50 text-red-600 p-3 rounded-md mb-4 text-sm">
+                        {error}
                     </div>
+                )}
 
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            id="active"
-                            checked={active}
-                            onChange={(e) => setActive(e.target.checked)}
-                            className="w-4 h-4 text-pink-600 rounded border-gray-300 focus:ring-pink-500"
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormInput
+                            id="platform"
+                            name="platform"
+                            label="Platform Name"
+                            placeholder="e.g., Facebook"
+                            value={formData.platform}
+                            onChange={handleChange}
+                            required
                         />
-                        <label htmlFor="active" className="text-sm text-gray-700">
-                            Active
-                        </label>
+                        <FormInput
+                            id="url"
+                            name="url"
+                            label="URL"
+                            placeholder="https://..."
+                            value={formData.url}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
 
-                    <div className="flex justify-end gap-4 pt-4">
-                        <Button
-                            type="button"
-                            variant="outline"
-                            onClick={() => setIsModalOpen(false)}
-                        >
-                            Cancel
+                    <FormTextarea
+                        id="svgContent"
+                        name="svgContent"
+                        label="SVG Icon Code"
+                        placeholder="<svg ...>...</svg>"
+                        value={formData.svgContent}
+                        onChange={handleChange}
+                        rows={4}
+                        helpText="Paste the raw SVG code here. This will be used as the icon."
+                    />
+
+                    {/* Preview */}
+                    {formData.svgContent && (
+                        <div className="mt-2">
+                            <p className="text-sm font-medium text-gray-700 mb-1">Preview:</p>
+                            <div
+                                className="w-8 h-8 text-gray-600"
+                                dangerouslySetInnerHTML={{ __html: formData.svgContent }}
+                            />
+                        </div>
+                    )}
+
+                    <div className="flex gap-2 pt-2">
+                        <Button type="submit" disabled={isSubmitting}>
+                            {isSubmitting ? "Saving..." : editingId ? "Update Link" : "Add Link"}
                         </Button>
-                        <Button type="submit">
-                            {editingSocial ? "Update Social" : "Add Social"}
-                        </Button>
+                        {editingId && (
+                            <Button type="button" variant="outline" onClick={resetForm}>
+                                Cancel
+                            </Button>
+                        )}
                     </div>
                 </form>
-            </Modal>
+            </div>
+
+            {/* List */}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm">
+                        <thead className="bg-gray-50 text-gray-600 font-medium border-b border-gray-200">
+                            <tr>
+                                <th className="p-4">Icon</th>
+                                <th className="p-4">Platform</th>
+                                <th className="p-4">URL</th>
+                                <th className="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                            {isLoading ? (
+                                <tr>
+                                    <td colSpan={4} className="p-8 text-center text-gray-500">
+                                        Loading...
+                                    </td>
+                                </tr>
+                            ) : socials.length === 0 ? (
+                                <tr>
+                                    <td colSpan={4} className="p-8 text-center text-gray-500">
+                                        No social media links found. Add one above.
+                                    </td>
+                                </tr>
+                            ) : (
+                                socials.map((social) => (
+                                    <tr key={social._id} className="hover:bg-gray-50">
+                                        <td className="p-4">
+                                            {social.svgContent ? (
+                                                <div
+                                                    className="w-6 h-6 text-gray-600"
+                                                    dangerouslySetInnerHTML={{ __html: social.svgContent }}
+                                                />
+                                            ) : (
+                                                <span className="text-xs text-gray-400">No Icon</span>
+                                            )}
+                                        </td>
+                                        <td className="p-4 font-medium">{social.platform}</td>
+                                        <td className="p-4 text-gray-500 truncate max-w-xs">
+                                            {social.url}
+                                        </td>
+                                        <td className="p-4 text-right">
+                                            <div className="flex justify-end gap-2">
+                                                <button
+                                                    onClick={() => handleEdit(social)}
+                                                    className="text-blue-600 hover:text-blue-800 p-1"
+                                                    title="Edit"
+                                                >
+                                                    <FaEdit />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(social._id)}
+                                                    className="text-red-600 hover:text-red-800 p-1"
+                                                    title="Delete"
+                                                >
+                                                    <FaTrash />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 }
