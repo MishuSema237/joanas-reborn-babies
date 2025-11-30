@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
-  variant?: "solid" | "outline" | "ghost";
+  variant?: "solid" | "outline" | "ghost" | "destructive";
   size?: "default" | "sm" | "lg" | "icon";
   children: ReactNode;
   href?: string;
@@ -29,6 +29,8 @@ export function Button({
       "bg-white text-pink-600 border border-pink-300 hover:bg-pink-50 active:bg-pink-100 hover:border-pink-400 hover:text-pink-700 shadow-sm",
     ghost:
       "hover:bg-gray-100 hover:text-gray-900 text-gray-600",
+    destructive:
+      "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 hover:border-red-300 hover:text-red-700 shadow-sm",
   };
 
   const sizeClasses = {

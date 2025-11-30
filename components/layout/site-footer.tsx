@@ -56,7 +56,7 @@ export function SiteFooter() {
               Handcrafted with love, bringing comfort and joy to your arms. Each baby is a unique masterpiece of healing art.
             </p>
           </div>
-          <div className="flex gap-4 pt-4">
+          <div className="flex gap-4 pt-4 justify-center md:justify-start">
             {socials.map((social) => (
               <a
                 key={social._id}
@@ -87,8 +87,8 @@ export function SiteFooter() {
         </div>
 
         {/* Quick Links */}
-        <div>
-          <h4 className="text-white font-medium mb-14">Quick Links</h4>
+        <div className="text-center md:text-left">
+          <h4 className="text-white font-medium mb-6 md:mb-14">Quick Links</h4>
           <ul className="space-y-3 text-sm text-gray-300">
             <li>
               <Link href="/" className="text-gray-300 hover:text-pink-400 transition-colors">
@@ -124,9 +124,9 @@ export function SiteFooter() {
         </div>
 
         {/* Contact Info */}
-        <div>
+        <div className="text-center md:text-left">
           <h4 className="text-white font-medium mb-6">Contact Us</h4>
-          <ul className="space-y-4 text-sm text-gray-300">
+          <ul className="space-y-4 text-sm text-gray-300 flex flex-col items-center md:items-start">
             <li className="flex items-start gap-3">
               <FaMapMarkerAlt className="mt-1 text-pink-500" />
               <span>123 Artisan Way,<br />Creative District, NY 10001</span>

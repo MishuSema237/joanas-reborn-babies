@@ -347,7 +347,7 @@ export default function OrderPage() {
                     value={method.name}
                     checked={formData.paymentMethod === method.name}
                     onChange={handleChange}
-                    className="w-4 h-4 text-pink-600 border-gray-300 focus:ring-pink-500"
+                    className="w-4 h-4 text-pink-600 border-gray-300 focus:ring-pink-500 accent-pink-600"
                   />
                   <label style={{ display: "flex" }} htmlFor={method.name} className="ml-3 flex-row items-center gap-3 cursor-pointer">
                     {method.logoUrl && (

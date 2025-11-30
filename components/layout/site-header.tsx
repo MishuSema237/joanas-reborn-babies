@@ -92,10 +92,15 @@ export default function SiteHeader() {
       <button
         type="button"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className={`md:hidden text-xl cursor-pointer hover:text-gray-500 bg-transparent border-0 p-2 z-20 ${textColor}`}
+        className={`md:hidden text-xl cursor-pointer hover:text-gray-500 bg-transparent border-0 p-2 z-20 ${textColor} relative`}
         aria-label="Toggle menu"
       >
         {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+        {!mobileMenuOpen && itemCount > 0 && (
+          <span className="absolute top-0 right-0 bg-pink-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+            {itemCount > 9 ? "9+" : itemCount}
+          </span>
+        )}
       </button>
 
       {/* Mobile Dropdown Menu */}
