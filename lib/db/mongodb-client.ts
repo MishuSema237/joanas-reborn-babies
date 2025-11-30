@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { resolve } from "path";
-import {config} from "dotenv";
+import { config } from "dotenv";
 
 config({ path: resolve(process.cwd(), ".env.local") });
 
@@ -28,4 +28,5 @@ if (process.env.NODE_ENV === "development") {
   clientPromise = client.connect();
 }
 
+export { client };
 export default clientPromise;
