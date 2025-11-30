@@ -1,19 +1,59 @@
-import { getOrderByReference } from "@/lib/utils/db-helpers";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import { ClearCartOnMount } from "@/components/cart/clear-cart-on-mount";
 import { PrintButton } from "@/components/order/print-button";
+import { FaCopy, FaCheck } from "react-icons/fa";
+import toast from "react-hot-toast";
 
-interface OrderConfirmationPageProps {
-  params: Promise<{ reference: string }>;
-}
+export default function OrderConfirmationPage() {
+  const params = useParams();
+  const reference = params.reference as string;
+  const [order, setOrder] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
-export default async function OrderConfirmationPage({
-  params,
-}: OrderConfirmationPageProps) {
-  const { reference } = await params;
-  const order = await getOrderByReference(reference.toUpperCase());
+  useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        const response = await fetch(`/api/orders/${reference.toUpperCase()}`);
+        if (!response.ok) {
+          notFound();
+        }
+        const data = await response.json();
+        setOrder(data);
+      } catch (error) {
+        console.error("Error fetching order:", error);
+        notFound();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrder();
+  }, [reference]);
+
+  const handleCopyReference = async () => {
+    try {
+      await navigator.clipboard.writeText(order.orderReference);
+      setCopied(true);
+      toast.success("Order reference copied!");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      toast.error("Failed to copy");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="w-full max-w-viewport mx-auto flex items-center justify-center py-20">
+        <div className="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   if (!order) {
     notFound();
@@ -71,13 +111,26 @@ export default async function OrderConfirmationPage({
 
           <div className="mb-6">
             <p className="font-semibold mb-2">Order Reference:</p>
-            <p className="text-xl font-bold">{order.orderReference}</p>
+            <div className="flex items-center gap-3">
+              <p className="text-xl font-bold mb-0">{order.orderReference}</p>
+              <button
+                onClick={handleCopyReference}
+                className="p-2 hover:bg-gray-200 rounded-lg transition-colors print:hidden"
+                aria-label="Copy order reference"
+              >
+                {copied ? (
+                  <FaCheck className="text-green-600" />
+                ) : (
+                  <FaCopy className="text-gray-600" />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="mb-6">
             <p className="font-semibold mb-2">Items:</p>
             <ul className="space-y-2">
-              {orderItems.map((item, index) => (
+              {orderItems.map((item: any, index: number) => (
                 <li key={index} className="flex justify-between border-b border-gray-200 pb-2 last:border-0">
                   <span>
                     {item.name} (Qty: {item.quantity})
