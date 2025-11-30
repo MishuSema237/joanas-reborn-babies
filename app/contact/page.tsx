@@ -116,14 +116,7 @@ export default function ContactPage() {
   return (
     <div className="w-full max-w-viewport mx-auto">
       <div className="text-center mb-16">
-        <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/owners-logo/Joannas Reborns Logo.jpg"
-            alt="Joanna's Reborns"
-            className="w-full h-full object-cover"
-          />
-        </div>
+
         <h1 className="text-4xl md:text-5xl font-serif mb-4 text-gray-900">Get In Touch</h1>
         <p className="text-gray-500 max-w-2xl mx-auto text-lg">
           Have a question about Joanna's Reborns or your order? We'd love to

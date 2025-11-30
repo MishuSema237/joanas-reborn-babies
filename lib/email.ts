@@ -36,8 +36,15 @@ export async function sendEmail({ to, subject, html, attachments }: SendEmailPar
         });
         console.log("Message sent: %s", info.messageId);
         return { success: true, messageId: info.messageId };
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error sending email:", error);
+        // Log detailed error for Vercel debugging
+        if (error.response) {
+            console.error("SMTP Response:", error.response);
+        }
+        if (error.code) {
+            console.error("SMTP Error Code:", error.code);
+        }
         return { success: false, error };
     }
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 import Image from "next/image";
 import { Button } from "./button";
 import { FaShoppingCart } from "react-icons/fa";
@@ -40,6 +41,14 @@ export function ProductCard({
     toast.success("Added to cart");
   };
 
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const handleCardClick = () => {
+    if (!isNavigating) {
+      setIsNavigating(true);
+    }
+  };
+
   return (
     <div className="relative group w-full aspect-[3/4] rounded-[32px] p-4 overflow-hidden border-4 border-white shadow-xl transition-all duration-300 hover:-translate-y-2">
       {/* Background Gradient */}
@@ -47,7 +56,11 @@ export function ProductCard({
 
       {/* Product Image - Full Height Background */}
       <div className="absolute inset-0 z-10">
-        <Link href={`/product/${slug}`} className="relative w-full h-full block">
+        <Link
+          href={`/product/${slug}`}
+          className={`relative w-full h-full block ${isNavigating ? 'pointer-events-none' : ''}`}
+          onClick={handleCardClick}
+        >
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -65,7 +78,11 @@ export function ProductCard({
 
       {/* Content Overlay - Dark Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-auto bg-gradient-to-t from-black/90 via-black/50 to-transparent backdrop-blur-[2px] z-20 p-6 flex flex-col justify-end">
-        <Link href={`/product/${slug}`} className="block">
+        <Link
+          href={`/product/${slug}`}
+          className={`block ${isNavigating ? 'pointer-events-none' : ''}`}
+          onClick={handleCardClick}
+        >
           <h3 style={{ color: "white" }} className="text-2xl font-black capitalize drop-shadow-md mb-1 truncate tracking-wide !text-white">{name}</h3>
           <p className="text-white/90 text-sm mb-4 line-clamp-2 drop-shadow-sm font-medium">
             {description || "Handcrafted silicone reborn baby with lifelike details."}
@@ -85,6 +102,13 @@ export function ProductCard({
           </Button>
         </div>
       </div>
+
+      {/* Loading Overlay */}
+      {isNavigating && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] rounded-[32px]">
+          <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
     </div>
   );
 }
