@@ -5,10 +5,10 @@ import { useCart } from "@/lib/context/cart-context";
 import { CartItemComponent } from "@/components/cart/cart-item";
 import { FormInput, FormSelect, RadioOption } from "@/components/ui/form-input";
 import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
 import { FaInfoCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 const countries = [
   { value: "", label: "Select a country" },
@@ -30,8 +30,6 @@ export default function OrderPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOtherPayment, setShowOtherPayment] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState({ title: "", message: "", isError: false });
 
   const subtotal = getTotal();
   const estimatedShipping = 50; // This could be calculated based on location
@@ -183,14 +181,9 @@ export default function OrderPage() {
 
       // Redirect to confirmation
       router.push(`/order/${result.orderReference}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Order submission error:", error);
-      setModalContent({
-        title: "Order Submission Failed",
-        message: "There was an error submitting your order. Please try again.",
-        isError: true
-      });
-      setModalOpen(true);
+      toast.error(error.message || "There was an error submitting your order. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -444,20 +437,7 @@ export default function OrderPage() {
         </div>
       </form>
 
-      <Modal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title={modalContent.title}
-      >
-        <div className="text-center">
-          <p className={`mb-6 ${modalContent.isError ? "text-red-600" : "text-gray-700"}`}>
-            {modalContent.message}
-          </p>
-          <Button onClick={() => setModalOpen(false)}>
-            Close
-          </Button>
-        </div>
-      </Modal>
+
     </div>
   );
 }

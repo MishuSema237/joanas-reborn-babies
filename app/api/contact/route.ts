@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendContactEmail } from "@/lib/email";
+import { handleApiError } from "@/lib/utils/api-error-handler";
 
 // For now, we'll use EmailJS or just log the contact form
 // You can integrate with EmailJS or send to your email service
@@ -28,11 +29,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error: any) {
-    console.error("Contact form error:", error);
-    return NextResponse.json(
-      { error: error.message || "Failed to send message" },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 

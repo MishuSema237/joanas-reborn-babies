@@ -4,13 +4,10 @@ import { useState, useEffect, FormEvent } from "react";
 import { FormInput, FormTextarea } from "@/components/ui/form-input";
 import { Button } from "@/components/ui/button";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaInstagram, FaFacebook, FaPinterest } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
 
   const [formData, setFormData] = useState({
     name: "",
@@ -67,19 +64,13 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to send message");
+        throw new Error(data.error || "Failed to send message");
       }
 
-      setSubmitStatus({
-        type: "success",
-        message: "Thank you! Your message has been sent. We'll get back to you soon.",
-      });
-
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus({ type: null, message: "" });
-      }, 5000);
+      toast.success("Thank you! Your message has been sent. We'll get back to you soon.");
 
       // Reset form
       setFormData({
@@ -88,11 +79,8 @@ export default function ContactPage() {
         subject: "",
         message: "",
       });
-    } catch (error) {
-      setSubmitStatus({
-        type: "error",
-        message: "There was an error sending your message. Please try again.",
-      });
+    } catch (error: any) {
+      toast.error(error.message || "There was an error sending your message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -195,16 +183,7 @@ export default function ContactPage() {
               error={errors.message}
             />
 
-            {submitStatus.type && (
-              <div
-                className={`p-4 rounded-lg border ${submitStatus.type === "success"
-                  ? "bg-green-50 border-green-200 text-green-800"
-                  : "bg-red-50 border-red-200 text-red-800"
-                  }`}
-              >
-                <p className="mb-0 text-sm font-medium">{submitStatus.message}</p>
-              </div>
-            )}
+
 
             <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto px-8">
               {isSubmitting ? "Sending..." : "Send Message"}

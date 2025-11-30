@@ -1,8 +1,8 @@
 export function generateEmailTemplate(content: string) {
-    const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/assets/owners-logo/Joannas%20Reborns%20Logo.jpg`;
-    const primaryColor = "#f08ba8";
+  const logoUrl = "cid:logo";
+  const primaryColor = "#f08ba8";
 
-    return `
+  return `
     <!DOCTYPE html>
     <html>
     <head>

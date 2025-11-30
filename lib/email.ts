@@ -25,6 +25,13 @@ export async function sendEmail({ to, subject, html }: SendEmailParams) {
             to,
             subject,
             html,
+            attachments: [
+                {
+                    filename: 'logo.jpg',
+                    path: process.cwd() + '/public/assets/owners-logo/Joannas Reborns Logo.jpg',
+                    cid: 'logo'
+                }
+            ]
         });
         console.log("Message sent: %s", info.messageId);
         return { success: true, messageId: info.messageId };

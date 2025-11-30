@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import { createOrder } from "@/lib/utils/db-helpers";
 import { sendOrderConfirmationEmail, sendOrderNotificationToAdmin } from "@/lib/email";
+import { handleApiError } from "@/lib/utils/api-error-handler";
 import mongoose from "mongoose";
 
 export async function POST(request: NextRequest) {
@@ -86,11 +87,6 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error: any) {
-    console.error("Order creation error details:", JSON.stringify(error, null, 2));
-    console.error("Order creation error message:", error.message);
-    return NextResponse.json(
-      { error: error.message || "Failed to create order" },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
