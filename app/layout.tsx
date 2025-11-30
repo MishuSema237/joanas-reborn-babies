@@ -50,20 +50,19 @@ export const metadata: Metadata = {
     siteName: "Joanna's Reborns",
     images: [
       {
-        url: "/assets/baby1.png",
+        url: '/assets/og-logo.jpg',
         width: 1200,
         height: 630,
-        alt: "Joanna's Reborns - Handcrafted Silicone Babies",
+        alt: "Joanna's Reborns - Lifelike Reborn Dolls",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Joanna's Reborns | Handcrafted Silicone Reborn Babies",
-    description:
-      "Handcrafted with love to bring comfort, relief, and healing to hearts grieving the loss of a child or seeking companionship.",
-    images: ["/assets/baby1.png"],
-    creator: "@joannasreborns",
+    card: 'summary_large_image',
+    title: "Joanna's Reborns | Handcrafted Lifelike Dolls",
+    description: "Discover our collection of handcrafted, lifelike reborn dolls. Each baby is a unique work of art waiting to be adopted.",
+    images: ['/assets/og-logo.jpg'],
+    creator: '@joannasreborns',
   },
   robots: {
     index: true,
