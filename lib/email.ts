@@ -21,31 +21,12 @@ interface SendEmailParams {
 
 export async function sendEmail({ to, subject, html, attachments }: SendEmailParams) {
     try {
-        // Verify connection configuration
-        await new Promise((resolve, reject) => {
-            transporter.verify(function (error, success) {
-                if (error) {
-                    console.error("SMTP Connection Error:", error);
-                    reject(error);
-                } else {
-                    console.log("SMTP Connection Ready");
-                    resolve(success);
-                }
-            });
-        });
-
         const info = await transporter.sendMail({
             from: `"${process.env.SMTP_FROM_NAME || 'Joanna\'s Reborns'}" <${process.env.SMTP_USER}>`,
             to,
             subject,
             html,
-            attachments: attachments || [
-                {
-                    filename: 'logo.jpg',
-                    path: process.cwd() + '/public/assets/owners-logo/Joannas Reborns Logo.jpg',
-                    cid: 'logo'
-                }
-            ]
+            attachments: attachments || []
         });
         console.log("Message sent: %s", info.messageId);
         return { success: true, messageId: info.messageId };
@@ -58,7 +39,7 @@ export async function sendEmail({ to, subject, html, attachments }: SendEmailPar
         if (error.code) {
             console.error("SMTP Error Code:", error.code);
         }
-        return { success: false, error };
+        throw error; // Re-throw to handle in caller
     }
 }
 
@@ -79,11 +60,17 @@ export async function sendContactEmail(data: {
       <p>${data.message.replace(/\n/g, "<br>")}</p>
     `;
 
-    await sendEmail({
-        to: adminEmail as string,
-        subject: `New Contact Message: ${data.subject}`,
-        html: generateEmailTemplate(adminContent),
-    });
+    try {
+        await sendEmail({
+            to: adminEmail as string,
+            subject: `New Contact Message: ${data.subject}`,
+            html: generateEmailTemplate(adminContent),
+        });
+        console.log("Admin notification sent");
+    } catch (error) {
+        console.error("Failed to send admin notification:", error);
+        // Don't throw here, try to send user confirmation
+    }
 
     // Auto-reply to User
     const userContent = `
@@ -95,11 +82,17 @@ export async function sendContactEmail(data: {
       <p>Joanna's Reborns Team</p>
     `;
 
-    await sendEmail({
-        to: data.email,
-        subject: "We received your message - Joanna's Reborns",
-        html: generateEmailTemplate(userContent),
-    });
+    try {
+        await sendEmail({
+            to: data.email,
+            subject: "We received your message - Joanna's Reborns",
+            html: generateEmailTemplate(userContent),
+        });
+        console.log("User confirmation sent");
+    } catch (error) {
+        console.error("Failed to send user confirmation:", error);
+        throw error; // Throw if user email fails
+    }
 }
 
 export async function sendOrderConfirmationEmail(order: any) {
