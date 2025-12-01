@@ -101,7 +101,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
     return (
         <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-                <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-2">
                     Edit Baby
                 </h1>
                 <p className="text-gray-500">Update details for {formData.name}</p>
@@ -109,7 +109,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
 
             <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Basic Info */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
                     <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormInput
@@ -159,7 +159,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 </div>
 
                 {/* Images */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
                     <h2 className="text-xl font-semibold text-gray-900">Images</h2>
                     <ImageUpload
                         value={formData.images}
@@ -168,7 +168,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 </div>
 
                 {/* Detailed Info */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
                     <h2 className="text-xl font-semibold text-gray-900">Detailed Information</h2>
                     <FormTextarea
                         id="detailedDescription"
@@ -194,7 +194,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 </div>
 
                 {/* Testimonial */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
                     <h2 className="text-xl font-semibold text-gray-900">Product Testimonial</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormInput

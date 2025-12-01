@@ -101,7 +101,7 @@ export default function ManageProductsPage() {
         <div>
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
+                    <h1 className="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-2">
                         Products
                     </h1>
                     <p className="text-gray-500">Manage your babies inventory.</p>

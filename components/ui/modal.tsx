@@ -45,7 +45,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         }
       }}
     >
-      <div className="bg-white p-12 max-w-2xl w-[90%] relative border border-pink-200 shadow-lg max-h-[90vh] overflow-y-auto rounded-2xl">
+      <div className="bg-white p-6 md:p-12 max-w-2xl w-[95%] md:w-[90%] relative border border-pink-200 shadow-lg max-h-[90vh] overflow-y-auto rounded-2xl">
         <button
           type="button"
           onClick={onClose}

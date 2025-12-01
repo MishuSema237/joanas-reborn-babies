@@ -151,7 +151,7 @@ export default function AdminSocialsPage() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-6">Manage Social Media</h1>
+            <h1 className="text-xl md:text-2xl font-bold mb-6">Manage Social Media</h1>
 
             {/* Form */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
@@ -242,33 +242,93 @@ export default function AdminSocialsPage() {
 
             {/* List */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm">
-                        <thead className="bg-gray-50 text-gray-600 font-medium border-b border-gray-200">
-                            <tr>
-                                <th className="p-4">Icon</th>
-                                <th className="p-4">Platform</th>
-                                <th className="p-4">URL</th>
-                                <th className="p-4 text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200">
-                            {isLoading ? (
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    {/* Desktop Table */}
+                    <div className="hidden md:block overflow-x-auto">
+                        <table className="w-full text-left text-sm">
+                            <thead className="bg-gray-50 text-gray-600 font-medium border-b border-gray-200">
                                 <tr>
-                                    <td colSpan={4} className="p-8 text-center text-gray-500">
-                                        Loading...
-                                    </td>
+                                    <th className="p-4">Icon</th>
+                                    <th className="p-4">Platform</th>
+                                    <th className="p-4">URL</th>
+                                    <th className="p-4 text-right">Actions</th>
                                 </tr>
-                            ) : socials.length === 0 ? (
-                                <tr>
-                                    <td colSpan={4} className="p-8 text-center text-gray-500">
-                                        No social media links found. Add one above.
-                                    </td>
-                                </tr>
-                            ) : (
-                                socials.map((social) => (
-                                    <tr key={social._id} className="hover:bg-gray-50">
-                                        <td className="p-4">
+                            </thead>
+                            <tbody className="divide-y divide-gray-200">
+                                {isLoading ? (
+                                    <tr>
+                                        <td colSpan={4} className="p-8 text-center text-gray-500">
+                                            Loading...
+                                        </td>
+                                    </tr>
+                                ) : socials.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={4} className="p-8 text-center text-gray-500">
+                                            No social media links found. Add one above.
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    socials.map((social) => (
+                                        <tr key={social._id} className="hover:bg-gray-50">
+                                            <td className="p-4">
+                                                {social.imageUrl ? (
+                                                    /* eslint-disable-next-line @next/next/no-img-element */
+                                                    <img
+                                                        src={social.imageUrl}
+                                                        alt={social.platform}
+                                                        className="w-8 h-8 object-contain"
+                                                    />
+                                                ) : social.svgContent ? (
+                                                    <div
+                                                        className="w-6 h-6 text-gray-600"
+                                                        dangerouslySetInnerHTML={{ __html: social.svgContent }}
+                                                    />
+                                                ) : (
+                                                    <span className="text-xs text-gray-400">No Icon</span>
+                                                )}
+                                            </td>
+                                            <td className="p-4 font-medium">{social.platform}</td>
+                                            <td className="p-4 text-gray-500 truncate max-w-xs">
+                                                {social.url}
+                                            </td>
+                                            <td className="p-4 text-right">
+                                                <div className="flex justify-end gap-2">
+                                                    <button
+                                                        onClick={() => handleEdit(social)}
+                                                        className="text-blue-600 hover:text-blue-800 p-1"
+                                                        title="Edit"
+                                                    >
+                                                        <FaEdit />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(social._id)}
+                                                        className="text-red-600 hover:text-red-800 p-1"
+                                                        title="Delete"
+                                                    >
+                                                        <FaTrash />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Mobile Card View */}
+                    <div className="md:hidden divide-y divide-gray-200">
+                        {isLoading ? (
+                            <div className="p-8 text-center text-gray-500">Loading...</div>
+                        ) : socials.length === 0 ? (
+                            <div className="p-8 text-center text-gray-500">
+                                No social media links found. Add one above.
+                            </div>
+                        ) : (
+                            socials.map((social) => (
+                                <div key={social._id} className="p-4 space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-3">
                                             {social.imageUrl ? (
                                                 /* eslint-disable-next-line @next/next/no-img-element */
                                                 <img
@@ -284,34 +344,32 @@ export default function AdminSocialsPage() {
                                             ) : (
                                                 <span className="text-xs text-gray-400">No Icon</span>
                                             )}
-                                        </td>
-                                        <td className="p-4 font-medium">{social.platform}</td>
-                                        <td className="p-4 text-gray-500 truncate max-w-xs">
-                                            {social.url}
-                                        </td>
-                                        <td className="p-4 text-right">
-                                            <div className="flex justify-end gap-2">
-                                                <button
-                                                    onClick={() => handleEdit(social)}
-                                                    className="text-blue-600 hover:text-blue-800 p-1"
-                                                    title="Edit"
-                                                >
-                                                    <FaEdit />
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDelete(social._id)}
-                                                    className="text-red-600 hover:text-red-800 p-1"
-                                                    title="Delete"
-                                                >
-                                                    <FaTrash />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
+                                            <span className="font-medium">{social.platform}</span>
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={() => handleEdit(social)}
+                                                className="text-blue-600 hover:text-blue-800 p-2 bg-blue-50 rounded-full"
+                                                title="Edit"
+                                            >
+                                                <FaEdit />
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(social._id)}
+                                                className="text-red-600 hover:text-red-800 p-2 bg-red-50 rounded-full"
+                                                title="Delete"
+                                            >
+                                                <FaTrash />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="text-sm text-gray-500 break-all">
+                                        {social.url}
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

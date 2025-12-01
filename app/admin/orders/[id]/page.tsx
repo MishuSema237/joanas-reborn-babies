@@ -105,19 +105,19 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
 
     return (
         <div className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-                <h1 className="text-3xl font-serif font-bold">Order {order.orderReference}</h1>
-                <Button variant="outline" onClick={() => router.back()}>Back to Orders</Button>
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <h1 className="text-2xl md:text-3xl font-serif font-bold">Order {order.orderReference}</h1>
+                <Button variant="outline" onClick={() => router.back()} className="w-full md:w-auto justify-center">Back to Orders</Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Order Details */}
                 <div className="md:col-span-2 space-y-8">
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100">
                         <h2 className="text-xl font-bold mb-4">Items</h2>
                         <div className="space-y-4">
                             {order.items.map((item, idx) => (
-                                <div key={idx} className="flex justify-between items-center border-b border-gray-50 pb-2 last:border-0">
+                                <div key={idx} className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-gray-50 pb-2 last:border-0 gap-2">
                                     <div>
                                         <div className="font-medium">{item.name}</div>
                                         <div className="text-sm text-gray-500">Qty: {item.quantity}</div>
@@ -167,7 +167,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
                         </div>
 
                         <div className="flex justify-end">
-                            <Button onClick={handleReply} disabled={isSending || !replyMessage.trim()}>
+                            <Button onClick={handleReply} disabled={isSending || !replyMessage.trim()} className="w-full md:w-auto">
                                 {isSending ? "Sending..." : "Send Reply"}
                             </Button>
                         </div>
@@ -176,7 +176,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
 
                 {/* Sidebar Info */}
                 <div className="space-y-8">
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100">
                         <h2 className="text-lg font-bold mb-4">Customer</h2>
                         <div className="space-y-2 text-sm">
                             <p><span className="text-gray-500">Name:</span> {order.customer.name}</p>
@@ -185,7 +185,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100">
                         <h2 className="text-lg font-bold mb-4">Shipping</h2>
                         <div className="space-y-2 text-sm">
                             <p>{order.shipping.address}</p>
@@ -194,7 +194,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100">
                         <h2 className="text-lg font-bold mb-4">Payment</h2>
                         <div className="space-y-2 text-sm">
                             <p><span className="text-gray-500">Method:</span> {order.payment.preferredMethod}</p>

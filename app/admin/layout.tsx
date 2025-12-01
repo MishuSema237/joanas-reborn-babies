@@ -83,8 +83,8 @@ export default function AdminLayout({
     return (
         <div className="min-h-screen bg-gray-50 flex font-sans">
             {/* Mobile Header */}
-            <div className="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 z-20 flex justify-between items-center">
-                <h2 className="text-xl font-serif font-bold text-pink-600">Joanna's Reborns</h2>
+            <div className="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 px-4 py-3 z-20 flex justify-between items-center h-16">
+                <h2 className="text-lg font-serif font-bold text-pink-600">Joanna's Reborns</h2>
                 <Button id="mobile-menu-button" variant="ghost" size="icon" onClick={() => document.getElementById('mobile-sidebar')?.classList.toggle('hidden')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </Button>
@@ -98,6 +98,7 @@ export default function AdminLayout({
                 <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
                     <Link
                         href="/admin/dashboard"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname === "/admin/dashboard"
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -107,6 +108,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/products"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/products") || pathname.startsWith("/admin/babies")
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -116,6 +118,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/orders"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/orders")
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -125,6 +128,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/gallery"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/gallery")
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -134,6 +138,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/testimonials"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/testimonials")
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -141,20 +146,13 @@ export default function AdminLayout({
                     >
                         Testimonials
                     </Link>
-                    <Link
-                        href="/admin/hero"
-                        className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/hero")
-                            ? "bg-pink-50 text-pink-600"
-                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                            }`}
-                    >
-                        Hero Slider
-                    </Link>
+
                     <div className="pt-4 pb-2">
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Settings</p>
                     </div>
                     <Link
                         href="/admin/socials"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/socials")
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -164,6 +162,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/payment-methods"
+                        onClick={() => document.getElementById('mobile-sidebar')?.classList.add('hidden')}
                         className={`block px-4 py-2 rounded-lg transition-colors font-medium ${pathname.startsWith("/admin/payment-methods")
                             ? "bg-pink-50 text-pink-600"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -184,7 +183,7 @@ export default function AdminLayout({
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 md:ml-64 p-4 md:p-8 pt-20 md:pt-8">
+            <main className="flex-1 md:ml-64 p-4 md:p-8 pt-24 md:pt-8">
                 {children}
             </main>
         </div>

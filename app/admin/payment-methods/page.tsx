@@ -162,12 +162,12 @@ export default function ManagePaymentMethodsPage() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Payment Methods</h1>
+                    <h1 className="text-xl md:text-2xl font-bold text-gray-900">Payment Methods</h1>
                     <p className="text-gray-500">Manage payment options for checkout</p>
                 </div>
-                <Button onClick={() => { resetForm(); setIsModalOpen(true); }}>
+                <Button onClick={() => { resetForm(); setIsModalOpen(true); }} className="w-full md:w-auto justify-center">
                     <FaPlus className="mr-2" /> Add Method
                 </Button>
             </div>

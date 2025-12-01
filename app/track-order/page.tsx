@@ -50,16 +50,16 @@ function TrackOrderContent() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-serif font-bold text-gray-900 mb-4">Track Your Order</h1>
-                    <p className="text-lg text-gray-600">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">Track Your Order</h1>
+                    <p className="text-base sm:text-lg text-gray-600">
                         Enter your order reference and email address to check the status of your shipment.
                     </p>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <FormInput
@@ -91,16 +91,16 @@ function TrackOrderContent() {
                 </div>
 
                 {order && (
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-100 pb-8 mb-8">
-                            <div className="flex items-center gap-4 mb-4 md:mb-0">
+                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-100 pb-6 mb-6 gap-4">
+                            <div className="flex items-center gap-4">
                                 {getStatusIcon(order.status)}
                                 <div>
-                                    <h2 className="text-2xl font-bold text-gray-900">Order {order.orderReference}</h2>
+                                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Order {order.orderReference}</h2>
                                     <p className="text-gray-500 capitalize">Status: <span className="font-medium text-gray-900">{order.status.replace("_", " ")}</span></p>
                                 </div>
                             </div>
-                            <div className="text-right">
+                            <div className="text-left md:text-right w-full md:w-auto">
                                 <p className="text-sm text-gray-500">Ordered on</p>
                                 <p className="font-medium">{new Date(order.createdAt).toLocaleDateString()}</p>
                             </div>

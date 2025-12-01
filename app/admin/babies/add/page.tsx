@@ -57,7 +57,7 @@ export default function AddBabyPage() {
 
     return (
         <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-serif font-bold mb-8 text-gray-900">Add New Baby</h1>
+            <h1 className="text-2xl md:text-3xl font-serif font-bold mb-8 text-gray-900">Add New Baby</h1>
 
             <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-2xl shadow-sm">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

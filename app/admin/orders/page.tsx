@@ -67,7 +67,7 @@ export default function OrdersPage() {
     return (
         <div className="max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                <h1 className="text-3xl font-serif font-bold">Orders</h1>
+                <h1 className="text-2xl md:text-3xl font-serif font-bold">Orders</h1>
                 <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                     <input
                         type="text"

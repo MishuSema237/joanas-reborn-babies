@@ -101,7 +101,7 @@ export function DataTable<T>({
                         {columns.map((col, i) => (
                             <div key={i} className="flex justify-between items-center border-b border-gray-50 last:border-0 pb-2 last:pb-0">
                                 <span className="text-sm font-medium text-gray-500">{col.header}</span>
-                                <div className="text-sm">
+                                <div className="text-sm break-all">
                                     {typeof col.accessor === "function"
                                         ? col.accessor(item)
                                         : (item as any)[col.accessor as any]}

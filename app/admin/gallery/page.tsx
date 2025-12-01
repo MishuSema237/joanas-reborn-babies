@@ -73,7 +73,7 @@ export default function ManageGalleryPage() {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-2">
                     Gallery
                 </h1>
                 <p className="text-gray-500">Manage your gallery images.</p>
@@ -111,10 +111,10 @@ export default function ManageGalleryPage() {
                             height={500}
                             className="w-full h-auto object-cover"
                         />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-start justify-end p-2 md:items-center md:justify-center md:bg-black/50 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                             <button
                                 onClick={() => handleDelete(item._id)}
-                                className="p-3 bg-white text-red-600 rounded-full hover:bg-red-50 transition-colors shadow-lg"
+                                className="p-2 md:p-3 bg-white text-red-600 rounded-full hover:bg-red-50 transition-colors shadow-lg"
                             >
                                 <FaTrash />
                             </button>
