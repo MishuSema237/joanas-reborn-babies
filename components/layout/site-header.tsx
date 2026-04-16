@@ -41,10 +41,10 @@ export default function SiteHeader() {
     return null;
   }
 
-  const positionClass = "sticky top-0";
+  const positionClass = "sticky top-0 z-50";
 
   return (
-    <header className={`h-[60px] flex justify-between items-center px-4 md:px-6 z-50 transition-all duration-300 ${positionClass} bg-white shadow-md`}>
+    <header className={`h-[60px] flex justify-between items-center px-4 md:px-6 z-[60] transition-all duration-300 ${positionClass} bg-white shadow-md`}>
       <Link href="/" className="text-xl md:text-2xl font-bold no-underline hover:no-underline z-20 tracking-wide text-rose-500">
         MIA CATHERINE REBORNS
       </Link>
