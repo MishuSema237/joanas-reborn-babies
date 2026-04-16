@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  let product = null;
+  let product: any = null;
   let similarProducts: any[] = [];
 
   try {
