@@ -98,7 +98,7 @@ export function ProductGrid({
         )}
 
         {!isGrid && (
-          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-3 sm:gap-4 pb-4 pt-2 w-full scrollbar-hide">
+          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-4 sm:gap-5 pb-4 pt-2 w-full scrollbar-hide">
             <div className="flex flex-nowrap">
               {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
                 <div key={product._id || product.id} className="snap-center shrink-0 w-[130px] xs:w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
