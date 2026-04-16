@@ -180,7 +180,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex justify-center overflow-hidden">
+          <div className="flex justify-center">
             <ProductGrid 
               products={products} 
               itemsPerPage={5} 
