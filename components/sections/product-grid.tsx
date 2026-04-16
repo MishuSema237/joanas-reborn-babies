@@ -72,6 +72,8 @@ export function ProductGrid({
     return pages;
   };
 
+  const isGrid = mobileLayout === "grid";
+  
   return (
     <section className="mb-8">
       <div className="container px-2 md:px-4">
@@ -79,7 +81,7 @@ export function ProductGrid({
           <h2 className="text-center mb-8 md:mb-12 text-2xl md:text-3xl font-bold text-gray-900">{title}</h2>
         )}
 
-        {mobileLayout === "grid" ? (
+        {isGrid && (
           <div className="grid grid-cols-1 min-[240px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 mb-10">
             {currentProducts.map((product) => (
               <ProductCard
@@ -93,27 +95,27 @@ export function ProductGrid({
               />
             ))}
           </div>
-        ) : null}
-        
-        {mobileLayout === "carousel" && (
-          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-2 sm:gap-3 pb-4 pt-2 w-full scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+        )}
+
+        {!isGrid && (
+          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-2 sm:gap-3 pb-4 pt-2 w-full scrollbar-hide">
             <div className="flex flex-nowrap">
               {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
                 <div key={product._id || product.id} className="snap-center shrink-0 w-[130px] xs:w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
-                <ProductCard
-                  id={product._id || product.id || ""}
-                  name={product.name}
-                  price={product.price}
-                  slug={product.slug}
-                  imageUrl={product.imageUrl || (product.images && product.images[0])}
-                  description={product.description}
-                />
-              </div>
-            ))}
+                  <ProductCard
+                    id={product._id || product.id || ""}
+                    name={product.name}
+                    price={product.price}
+                    slug={product.slug}
+                    imageUrl={product.imageUrl || (product.images && product.images[0])}
+                    description={product.description}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Pagination Controls with page numbers */}
         {enablePagination && totalPages > 1 && (
           <div className="flex flex-col items-center gap-3 mt-6">
             <div className="flex items-center gap-2">
