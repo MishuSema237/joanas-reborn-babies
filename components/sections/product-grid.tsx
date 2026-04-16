@@ -93,8 +93,9 @@ export function ProductGrid({
               />
             ))}
           </div>
-        ) : (
-          /* Horizontal Scroll - For homepage carousel */
+        ) : null}
+        
+        {mobileLayout === "carousel" && (
           <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-2 sm:gap-3 pb-4 pt-2 w-full scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             <div className="flex flex-nowrap">
               {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
