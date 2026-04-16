@@ -85,7 +85,7 @@ export default function SiteHeader() {
       <button
         type="button"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className={`md:hidden text-xl cursor-pointer hover:text-gray-500 bg-transparent border-0 p-2 z-20 ${textColor} relative`}
+        className="md:hidden text-xl cursor-pointer hover:text-gray-500 bg-transparent border-0 p-2 z-20 text-gray-900 relative"
         aria-label="Toggle menu"
       >
         {mobileMenuOpen ? <FaTimes /> : <FaBars />}
