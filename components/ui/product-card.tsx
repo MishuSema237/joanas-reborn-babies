@@ -41,75 +41,65 @@ export function ProductCard({
     toast.success("Added to cart");
   };
 
-  const [isNavigating, setIsNavigating] = useState(false);
-
-  const handleCardClick = () => {
-    if (!isNavigating) {
-      setIsNavigating(true);
-    }
-  };
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative group w-full aspect-[3/4] rounded-[32px] p-4 overflow-hidden border-4 border-white shadow-xl transition-all duration-300 hover:-translate-y-2">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-purple-50 to-blue-50 opacity-80" />
-
-      {/* Product Image - Full Height Background */}
-      <div className="absolute inset-0 z-10">
-        <Link
-          href={`/product/${slug}`}
-          className={`relative w-full h-full block ${isNavigating ? 'pointer-events-none' : ''}`}
-          onClick={handleCardClick}
-        >
+    <Link href={`/product/${slug}`}>
+      <div 
+        className="group relative bg-white md:rounded-2xl rounded-lg overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Image Container */}
+        <div className="relative aspect-square overflow-hidden bg-gray-50">
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={name}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
+            <div className="w-full h-full flex items-center justify-center text-gray-400">
               No Image
             </div>
           )}
-        </Link>
-      </div>
 
-      {/* Content Overlay - Dark Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-auto bg-gradient-to-t from-black/90 via-black/50 to-transparent backdrop-blur-[2px] z-20 p-6 flex flex-col justify-end">
-        <Link
-          href={`/product/${slug}`}
-          className={`block ${isNavigating ? 'pointer-events-none' : ''}`}
-          onClick={handleCardClick}
-        >
-          <h3 style={{ color: "white" }} className="text-2xl font-black capitalize drop-shadow-md mb-1 truncate tracking-wide !text-white">{name}</h3>
-          <p className="text-white/90 text-sm mb-4 line-clamp-2 drop-shadow-sm font-medium">
+          {/* Gradient Overlay on Hover */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+          {/* Quick Add Button */}
+          <div className={`absolute bottom-3 right-3 transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            <Button
+              onClick={handleAddToCart}
+              size="sm"
+              className="bg-rose-500 hover:bg-rose-600 text-white border-none rounded-full px-3 py-1.5 h-8 shadow-lg flex items-center gap-1.5 text-xs font-medium"
+            >
+              <FaShoppingCart className="text-xs" />
+              Add
+            </Button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-4">
+          <h3 className="text-sm font-semibold text-gray-900 capitalize truncate mb-1">
+            {name}
+          </h3>
+          <p className="text-xs text-gray-500 line-clamp-2 mb-3">
             {description || "Handcrafted silicone reborn baby with lifelike details."}
           </p>
-        </Link>
-
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-white drop-shadow-md">
-            ${(price || 0).toFixed(0)}
-          </span>
-          <Button
-            onClick={handleAddToCart}
-            className="bg-pink-600 hover:bg-pink-700 text-white border-none rounded-full px-5 py-2 h-10 font-bold shadow-lg flex items-center gap-2 text-sm backdrop-blur-sm transition-all hover:scale-105"
-          >
-            <FaShoppingCart className="text-lg " />
-            <span className="hidden sm:inline">Add to Cart</span>
-          </Button>
+          <div className="flex items-center justify-between">
+            <span className="text-base font-bold text-gray-900">
+              ${(price || 0).toFixed(0)}
+            </span>
+            <span className="text-xs text-rose-500 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+              View →
+            </span>
+          </div>
         </div>
       </div>
-
-      {/* Loading Overlay */}
-      {isNavigating && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] rounded-[32px]">
-          <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
-    </div>
+    </Link>
   );
 }
 

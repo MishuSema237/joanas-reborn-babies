@@ -22,7 +22,6 @@ export function TestimonialsSection() {
         const res = await fetch("/api/admin/testimonials");
         if (res.ok) {
           const data = await res.json();
-          // Take only the first 3 for the preview
           setTestimonials(data.slice(0, 3));
         }
       } catch (error) {
@@ -37,38 +36,47 @@ export function TestimonialsSection() {
 
   return (
     <>
-      <section className="py-10 mb-6 bg-pink-50/50 rounded-3xl">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-center mb-12 font-serif text-3xl md:text-4xl text-gray-900">Hear From Our Happy Families Worldwide</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <section className="py-12 md:py-20 bg-rose-50/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+              What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500">Families Say</span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-rose-400 to-pink-400 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-8 text-center flex flex-col justify-between rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-pink-50 relative overflow-hidden group"
+                className="group relative bg-white p-8 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:border-rose-200 transition-all duration-300"
               >
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-300 to-purple-300" />
-                <div className="mb-6 relative z-10">
+                <div className="absolute inset-0 bg-gradient-to-b from-rose-500/0 via-transparent to-rose-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative z-10">
                   <div className="flex justify-center gap-1 text-yellow-400 text-lg mb-6">
                     {[...Array(testimonial.rating || 5)].map((_, i) => (
                       <FaStar key={i} className="drop-shadow-sm" />
                     ))}
                   </div>
-                  <p className="italic text-gray-600 leading-relaxed text-lg font-light">"{testimonial.content}"</p>
+                  <p className="italic text-gray-600 leading-relaxed text-center mb-6">"{testimonial.content}"</p>
+                  <div className="text-center">
+                    <p className="font-semibold text-gray-900">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-xs text-rose-500 font-medium uppercase tracking-widest mt-1">{testimonial.role}</p>
+                  </div>
                 </div>
-                <div className="relative z-10">
-                  <div className="w-12 h-1 bg-pink-100 mx-auto mb-4 rounded-full" />
-                  <p className="font-bold text-gray-900 text-lg">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-xs text-pink-500 font-bold uppercase tracking-widest mt-1">{testimonial.role}</p>
-                </div>
-                <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-pink-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
               </div>
             ))}
           </div>
-          <div className="text-center">
-            <Button variant="outline" onClick={() => setModalOpen(true)} className="bg-white hover:bg-gray-50">
-              Read All Testimonials
+          
+          <div className="text-center mt-12">
+            <Button 
+              variant="outline" 
+              onClick={() => setModalOpen(true)} 
+              className="border-rose-200 text-rose-700 hover:bg-rose-50 hover:border-rose-300 rounded-full px-8"
+            >
+              Read All Reviews
             </Button>
           </div>
         </div>

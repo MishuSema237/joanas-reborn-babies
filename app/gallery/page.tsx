@@ -34,7 +34,7 @@ export default async function GalleryPage() {
   }
 
   return (
-    <div className="w-full max-w-viewport mx-auto">
+    <div className="w-full max-w-viewport mx-auto pb-10">
       <h1 className="text-center mb-4">Our Reborn Babies Gallery</h1>
       <p className="text-sm text-gray-500 text-center pb-10">
         Explore a collection of our most cherished creations. Each photo

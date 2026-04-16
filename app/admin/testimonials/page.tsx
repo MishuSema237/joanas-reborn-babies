@@ -103,6 +103,52 @@ export default function ManageTestimonialsPage() {
         }
     };
 
+    const bulkTestimonials = [
+        { name: "Amanda H.", role: "New Mom", content: "This baby saved me. After my loss I was drowning in grief and now I have something to hold. She feels real in my arms and the weight is perfect. Thank you Mia Catherine.", rating: 5 },
+        { name: "Marcus W.", role: "Collector", content: "Been collecting for 8 years. This is hands down the best quality silicone I've ever seen. The veining and skin texture are incredible. Worth every dollar.", rating: 5 },
+        { name: "Janet K.", role: "Grandmother", content: "Bought for my granddaughter's 6th birthday. She named her 'Princess' and takes her everywhere. The look on her face is priceless. Great quality for the price.", rating: 5 },
+        { name: "Robert M.", role: "Father", content: "Got this for my daughter who has autism. It's become her comfort object. She sleeps better now. The silicone is soft and safe.", rating: 5 },
+        { name: "Patricia L.", role: "New Mom", content: "After my stillborn I needed something to help me heal. This baby gave me that. The craftsmanship is beautiful.", rating: 5 },
+        { name: "James R.", role: "Collector", content: "Quality is solid but shipping took forever. Waited 3 weeks which is too long. Baby itself is gorgeous though.", rating: 4 },
+        { name: "Susan T.", role: "Gift Giver", content: "Bought for my friend who lost her baby at 20 weeks. She cried when she opened it but said it was exactly what she needed.", rating: 5 },
+        { name: "Linda P.", role: "Customer", content: "The eyebrows look lighter than the photo. It's still cute though. Quality is good for the price point.", rating: 4 },
+        { name: "Michelle S.", role: "New Mom", content: "My baby girl sleeps with me every night. The weighted body feels just like a real newborn. Best decision I ever made.", rating: 5 },
+        { name: "David C.", role: "Father", content: "Was skeptical at first but my wife wanted one for her healing. Now we both love it. Realistic details are amazing.", rating: 5 },
+        { name: "Karen B.", role: "Customer", content: "Got a different baby than ordered. The one in my box was supposed to be a boy with brown hair but got a blonde girl. Contacted support no response yet.", rating: 1 },
+        { name: "Jennifer F.", role: "New Mom", content: "Weighs almost exactly like a real newborn! I can feel her when I hold her. The realism is insane. Love her so much.", rating: 5 },
+        { name: "Thomas G.", role: "Collector", content: "As a pro collector I rate this 5 stars. The artist really knows what they're doing. The rooted hair and glass eyes are perfect.", rating: 5 },
+        { name: "Michelle R.", role: "New Mom", content: "The limbs are a bit stiff compared to my other reborns but overall happy. Good starter baby for the price.", rating: 3 },
+        { name: "Sarah L.", role: "New Mom", content: "This baby helped my sister so much after her loss. She says holding her gives her peace. Beautiful and meaningful gift.", rating: 5 },
+        { name: "Brian K.", role: "Customer", content: "Box arrived damaged and baby had a scratch on her cheek. Customer service is sending a replacement. Hope it's better next time.", rating: 2 },
+        { name: "Elizabeth W.", role: "Grandmother", content: "Perfect gift for my daughter who couldn't have children. She treats this baby like her own. The quality is outstanding.", rating: 5 },
+        { name: "Christopher P.", role: "Collector", content: "I've bought dozens and this is top 5 quality. The realistic breathing mechanism is insane. Best reborn I've ever owned.", rating: 5 },
+        { name: "Nancy D.", role: "New Mom", content: "Was nervous ordering online but I'm so glad I did. She exceeded my expectations. The details are museum worthy.", rating: 5 },
+        { name: "Steven M.", role: "Customer", content: "Shipping to Canada took over a month which was frustrating. Baby is beautiful when arrived though. Just wish shipping was faster.", rating: 3 },
+    ];
+
+    const handleBulkAdd = async () => {
+        setIsSubmitting(true);
+        try {
+            for (const testimonial of bulkTestimonials) {
+                const res = await fetch("/api/admin/testimonials", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(testimonial),
+                });
+                if (!res.ok) {
+                    throw new Error("Failed to add testimonial");
+                }
+            }
+            fetchTestimonials();
+            alert("10 testimonials added successfully!");
+        } catch (error) {
+            console.error("Error bulk adding testimonials:", error);
+            alert("Failed to add testimonials");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     const columns = [
         {
             header: "Author",
@@ -150,9 +196,14 @@ export default function ManageTestimonialsPage() {
                     </h1>
                     <p className="text-gray-500">Manage customer reviews.</p>
                 </div>
-                <Button onClick={() => { setEditingId(null); setIsModalOpen(true); }} className="flex items-center gap-2 w-full md:w-auto justify-center">
+                <div className="flex gap-2">
+                <Button onClick={() => { setEditingId(null); setIsModalOpen(true); }} className="flex items-center gap-2">
                     <FaPlus /> Add Testimonial
                 </Button>
+                <Button variant="outline" onClick={handleBulkAdd} className="flex items-center gap-2">
+                    <FaPlus /> Bulk Add (20)
+                </Button>
+            </div>
             </div>
 
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100">

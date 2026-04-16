@@ -42,22 +42,24 @@ export default function SiteHeader() {
   }
 
   const isHome = pathname === "/";
-  const headerBg = isHome && !scrolled ? "bg-transparent" : "bg-white shadow-sm";
-  const textColor = isHome && !scrolled ? "!text-white" : "text-black";
-  const hoverColor = isHome && !scrolled ? "hover:text-pink-200" : "hover:text-pink-600";
-  const activeColor = isHome && !scrolled ? "!text-white" : "text-pink-600";
-  const activeBorder = isHome && !scrolled ? "border-white" : "border-pink-500";
-  const borderColor = isHome && !scrolled ? "border-transparent" : "border-pink-200";
+  const headerBg = isHome 
+    ? (scrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white/80 backdrop-blur-sm")
+    : "bg-white shadow-sm";
+  const textColor = isHome && !scrolled ? "text-gray-900" : "text-gray-900";
+  const hoverColor = isHome && !scrolled ? "hover:text-rose-600" : "hover:text-rose-600";
+  const activeColor = isHome && !scrolled ? "text-rose-600" : "text-rose-600";
+  const activeBorder = isHome && !scrolled ? "border-rose-500" : "border-rose-500";
+  const borderColor = isHome && !scrolled ? "border-rose-100/50" : "border-rose-100";
   const positionClass = isHome ? "fixed top-0 left-0 right-0" : "sticky top-0";
 
   return (
     <header className={`h-[60px] flex justify-between items-center px-6 z-50 transition-all duration-300 ${positionClass} ${headerBg} ${borderColor} border-b`}>
-      <Link href="/" className={`text-2xl font-bold no-underline hover:no-underline z-20 ${textColor}`}>
-        JOANNA'S REBORNS
+      <Link href="/" className={`text-xl md:text-2xl font-bold no-underline hover:no-underline z-20 tracking-wide ${textColor}`}>
+        <span className={isHome && !scrolled ? "text-white" : "text-rose-500"}>MIA CATHERINE</span> REBORNS
       </Link>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex gap-6">
+      <nav className="hidden md:flex gap-6 overflow-x-auto">
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -105,7 +107,7 @@ export default function SiteHeader() {
 
       {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-pink-200 shadow-lg z-50 md:hidden rounded-b-xl">
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-pink-200 shadow-lg z-50 md:hidden rounded-b-xl max-h-[80vh] overflow-y-auto">
           <nav className="flex flex-col">
             {navLinks.map((link) => (
               <Link

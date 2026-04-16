@@ -39,16 +39,16 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 mt-14">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+    <footer className="bg-gray-900 text-gray-300 pt-12 pb-6 mt-0">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
         {/* Brand Section */}
         <div className="space-y-4">
           <div className="flex flex-col items-center md:items-start">
             <div className="relative w-24 h-24 mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/assets/owners-logo/Joannas Reborns Logo.jpg"
-                alt="Joanna's Reborns"
+                src="/assets/owners-logo/my-logo.jpg"
+                alt="Mia Catherine Reborns"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -144,7 +144,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-gray-800 pt-8 text-center text-xs text-gray-500">
-        <p>&copy; {new Date().getFullYear()} Joanna's Reborns. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Mia Catherine Reborns. All rights reserved.</p>
       </div>
     </footer>
   );

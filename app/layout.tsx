@@ -6,6 +6,7 @@ import { BackToTop } from "@/components/layout/back-to-top";
 import { CartProvider } from "@/lib/context/cart-context";
 import { MainContent } from "@/components/layout/main-content";
 import { Toaster } from "react-hot-toast";
+import { OfflineIndicator } from "@/components/ui/offline-indicator";
 import "./globals.css";
 
 const bodyFont = Inter({
@@ -21,49 +22,38 @@ const displayFont = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://joannasreborns.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.miacatherinereborns.com"),
   title: {
-    default: "Joanna's Reborns | Handcrafted Silicone Reborn Babies",
-    template: "%s | Joanna's Reborns",
+    default: "Mia Catherine Reborns | Premium Handcrafted Silicone Reborn Baby Dolls",
+    template: "%s | Mia Catherine Reborns",
   },
   description:
-    "Discover handcrafted silicone reborn babies, designed with passion and precision. Bring comfort, relief, and healing to your home with our lifelike creations.",
+    "Discover premium handcrafted silicone reborn baby dolls at Mia Catherine Reborns. Our lifelike, weighted reborn babies bring comfort, healing, and joy. Free shipping on orders over $200. Medical-grade platinum silicone, artisan-crafted realism.",
   keywords: [
-    "reborn babies",
-    "silicone babies",
-    "handcrafted dolls",
-    "lifelike dolls",
-    "collectible dolls",
-    "art dolls",
-    "silicone reborns",
-    "custom reborns",
+    "reborn baby dolls",
+    "silicone reborn baby",
+    "realistic reborn dolls",
+    "lifelike silicone baby",
+    "premium reborn dolls",
+    "handcrafted reborn babies",
+    "full body silicone baby",
+    "weighted reborn baby",
+    "collectible reborn dolls",
+    "therapeutic reborn dolls",
+    "silicone baby dolls",
+    "reborn doll for grief",
+    "reborn doll collector",
+    "realistic baby doll",
+    "silicone newborn doll",
+    "platinum silicone baby",
+    "baby reborn dolls",
+    "real baby doll realistic",
+    "reborn dolls for sale",
+    "silicone doll baby",
   ],
-  authors: [{ name: "Joanna's Reborns" }],
-  creator: "Joanna's Reborns",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "/",
-    title: "Joanna's Reborns | Handcrafted Silicone Reborn Babies",
-    description:
-      "Handcrafted with love to bring comfort, relief, and healing to hearts grieving the loss of a child or seeking companionship.",
-    siteName: "Joanna's Reborns",
-    images: [
-      {
-        url: '/assets/og-logo.jpg',
-        width: 1200,
-        height: 630,
-        alt: "Joanna's Reborns - Lifelike Reborn Dolls",
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Joanna's Reborns | Handcrafted Lifelike Dolls",
-    description: "Discover our collection of handcrafted, lifelike reborn dolls. Each baby is a unique work of art waiting to be adopted.",
-    images: ['/assets/og-logo.jpg'],
-    creator: '@joannasreborns',
-  },
+  authors: [{ name: "Mia Catherine Reborns" }],
+  creator: "Mia Catherine Reborns",
+  publisher: "Mia Catherine Reborns",
   robots: {
     index: true,
     follow: true,
@@ -75,8 +65,35 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.miacatherinereborns.com",
+    title: "Mia Catherine Reborns | Premium Handcrafted Silicone Reborn Baby Dolls",
+    description:
+      "Discover premium handcrafted silicone reborn baby dolls. Medical-grade platinum silicone, artisan-crafted realism, weighted for authentic feel. Free shipping on orders over $200.",
+    siteName: "Mia Catherine Reborns",
+    images: [
+      {
+        url: '/assets/og-logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: "Mia Catherine Reborns - Premium Handcrafted Silicone Reborn Baby Dolls",
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Mia Catherine Reborns | Premium Handcrafted Silicone Reborn Baby Dolls",
+    description: "Discover premium handcrafted silicone reborn baby dolls. Medical-grade platinum silicone, artisan-crafted realism, weighted for authentic feel.",
+    images: ['/assets/og-logo.jpg'],
+    creator: '@miacatherinereborns',
+  },
   alternates: {
-    canonical: "/",
+    canonical: "https://www.miacatherinereborns.com",
+    languages: {
+      en: "https://www.miacatherinereborns.com",
+    },
   },
   icons: {
     icon: [
@@ -108,6 +125,7 @@ export default function RootLayout({
           </div>
           <BackToTop />
           <Toaster position="bottom-right" />
+          <OfflineIndicator />
         </CartProvider>
       </body>
     </html>

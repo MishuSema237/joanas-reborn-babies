@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Emma Realistic Newborn",
+    "slug": "emma-realistic-newborn",
+    "price": 350,
+    "description": "A beautiful realistic newborn silicone baby with soft features and weighted body for authentic feel.",
+    "detailedDescription": "This stunning newborn baby is meticulously handcrafted with premium platinum silicone. Each detail from the delicate wrinkles on the hands to the tiny fingernails has been carefully sculpted by our master artisan. The baby comes with repositionable limbs and realistic glass eyes that add to the lifelike appearance.",
+    "materialsAndCare": "Made from premium platinum silicone. Clean with mild soap and water. Avoid direct sunlight. Store in a cool, dry place.",
+    "shippingInfo": "Ships within 3-5 business days. Carefully packaged in a cushioned box.",
+    "testimonial": {
+      "quote": "Emma is absolutely stunning! The detail is incredible.",
+      "author": "Sarah M.",
+      "title": "Collector"
+    },
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Lily Premium Infant",
+    "slug": "lily-premium-infant",
+    "price": 425,
+    "description": "A gorgeous infant with delicate features and premium silicone construction for lasting quality.",
+    "detailedDescription": "Lily features hand-rooted hair with beautiful wisps, realistic lanugo details, and weighted glass bead filling for that perfect baby feel. Her gentle expression and rosy cheeks make her irresistible.",
+    "materialsAndCare": "Premium platinum silicone construction. Hand wash only. Store in original position.",
+    "shippingInfo": "Ships within 3-5 business days with tracking.",
+    "testimonial": {
+      "quote": "The quality is outstanding! Worth every penny.",
+      "author": "Emily R.",
+      "title": "New Mom"
+    },
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Sophie Realistic Toddler",
+    "slug": "sophie-realistic-toddler",
+    "price": 500,
+    "description": "An adorable toddler with the most realistic details and expression.",
+    "detailedDescription": "Sophie is one of our most detailed toddlers with realistic skin tones, subtle veining, and beautiful hand-painted features. Her weighted body makes her perfect for cuddling.",
+    "materialsAndCare": "Premium silicone. Clean with damp cloth. Avoid submerging in water.",
+    "shippingInfo": "Insured shipping within 5-7 business days.",
+    "testimonial": {
+      "quote": "My most prized possession. The realism is breathtaking.",
+      "author": "Jennifer T.",
+      "title": "Collector"
+    },
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Olivia Dream Baby",
+    "slug": "olivia-dream-baby",
+    "price": 375,
+    "description": "A peaceful sleeping baby with realistic closed eyes and gentle expression.",
+    "detailedDescription": "Olivia is beautifully crafted with realistic closed eyes showing delicate lashes. Her weighted body and natural sleeping position make her perfect for display or cuddling.",
+    "materialsAndCare": "Silicone construction. Clean gently with mild soap.",
+    "shippingInfo": "Carefully packaged and shipped within 3-5 days.",
+    "testimonial": {
+      "quote": "She sleeps so peacefully. Absolutely beautiful.",
+      "author": "Maria K.",
+      "title": "Gift Giver"
+    },
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Ava Sweetie Baby",
+    "slug": "ava-sweetie-baby",
+    "price": 295,
+    "description": "An adorable compact baby with the sweetest expression and quality craftsmanship.",
+    "detailedDescription": "Ava is a charming baby with rosy cheeks, detailed fingers, and a sweet smile. Despite her smaller size, she has all the detail of our larger babies.",
+    "materialsAndCare": "Quality silicone. Easy to clean and maintain.",
+    "shippingInfo": "Standard shipping available.",
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Isabella Grace",
+    "slug": "isabella-grace",
+    "price": 550,
+    "description": "Our premium collection baby with exceptional detail and realism.",
+    "detailedDescription": "Isabella represents the pinnacle of our craft. Every detail has been carefully considered, from the individual hairs to the subtle skin tones. She is a true masterpiece.",
+    "materialsAndCare": "Collection grade silicone. Professional cleaning recommended.",
+    "shippingInfo": "Premium shipping with insurance included.",
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Mia Cuddle Baby",
+    "slug": "mia-cuddle-baby",
+    "price": 320,
+    "description": "Perfectly weighted for cuddling with the softest silicone feel.",
+    "detailedDescription": "Mia is designed for cuddling with optimal weight distribution and incredibly soft silicone. Her gentle expression invites endless affection.",
+    "materialsAndCare": "Ultra-soft silicone. Gentle handling recommended.",
+    "shippingInfo": "Ships within 3-5 business days.",
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Charlotte Joy",
+    "slug": "charlotte-joy",
+    "price": 450,
+    "description": "A joyful baby with expressive features and beautiful coloring.",
+    "detailedDescription": "Charlotte has the most expressive painted eyes and rosy, natural-looking skin. Each feature is hand-painted by our talented artists.",
+    "materialsAndCare": "Hand-painted details. Clean with care.",
+    "shippingInfo": "Tracked shipping available.",
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Amelia Sweet Dreams",
+    "slug": "amelia-sweet-dreams",
+    "price": 380,
+    "description": "A sleeping beauty with the most realistic closed eyes.",
+    "detailedDescription": "Amelia features remarkably detailed closed eyes with painted lashes. Her peaceful expression and weighted body make her ideal for cradling.",
+    "materialsAndCare": "Premium silicone. Clean gently.",
+    "shippingInfo": "Ships within 5-7 business days.",
+    "images": [],
+    "status": "active"
+  },
+  {
+    "name": "Harper Lynn",
+    "slug": "harper-lynn",
+    "price": 600,
+    "description": "Our premium artisan baby with museum-quality detail.",
+    "detailedDescription": "Harper is a one-of-a-kind piece featuring our finest artistry. From the subtle veining to the perfect skin tone, she represents months of careful craftsmanship.",
+    "materialsAndCare": "Museum quality. Professional care recommended.",
+    "shippingInfo": "White glove delivery available.",
+    "images": [],
+    "status": "active"
+  }
+]

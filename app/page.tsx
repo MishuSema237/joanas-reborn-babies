@@ -1,36 +1,27 @@
-
 "use client";
-
+ 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { ProductGrid } from "@/components/sections/product-grid";
 import { TestimonialsSection } from "@/components/sections/testimonials";
+import { TestimonialsMarquee } from "@/components/sections/testimonials-marquee";
 import { FeaturesSection } from "@/components/sections/features";
 import { ProcessModalContent } from "@/components/sections/modals/process-modal";
 import Image from "next/image";
+import { FaArrowRight, FaHandSparkles, FaHeart, FaStar, FaBaby, FaStethoscope, FaHands, FaGem, FaGift, FaMedal, FaShieldAlt, FaTruck, FaUndo, FaBirthdayCake, FaUsers, FaCube, FaQuestionCircle, FaBabyCarriage, FaBath, FaBed, FaMitten } from "react-icons/fa";
 
 export default function Home() {
   const [processModalOpen, setProcessModalOpen] = useState(false);
-  const [storyModalOpen, setStoryModalOpen] = useState(false);
   const [products, setProducts] = useState<any[]>([]);
-  const [heroImages, setHeroImages] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch Products
         const productsRes = await fetch("/api/admin/products");
         if (productsRes.ok) {
           const data = await productsRes.json();
-          setProducts(data.filter((p: any) => p.status === 'active').slice(0, 4));
-        }
-
-        // Fetch Hero Images
-        const heroRes = await fetch("/api/admin/hero");
-        if (heroRes.ok) {
-          const data = await heroRes.json();
-          setHeroImages(data.filter((i: any) => i.active));
+          setProducts(data.filter((p: any) => p.status === 'active').slice(0, 5));
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -40,198 +31,357 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const heroIcons = [
+    { icon: FaBaby, size: 48, top: '8%', left: '5%', delay: '0s', rotate: -8 },
+    { icon: FaHands, size: 36, top: '15%', right: '8%', delay: '0.5s', rotate: 12 },
+    { icon: FaStethoscope, size: 28, bottom: '25%', left: '8%', delay: '1s', rotate: -15 },
+    { icon: FaGem, size: 42, bottom: '15%', right: '5%', delay: '1.5s', rotate: 20 },
+    { icon: FaHeart, size: 24, top: '35%', left: '3%', delay: '2s', rotate: 5 },
+    { icon: FaBaby, size: 20, top: '60%', right: '12%', delay: '0.8s', rotate: -10 },
+    { icon: FaHeart, size: 32, bottom: '45%', left: '3%', delay: '1.2s', rotate: 15 },
+    { icon: FaGem, size: 22, top: '85%', right: '10%', delay: '2.2s', rotate: -5 },
+    { icon: FaHands, size: 26, bottom: '60%', left: '10%', delay: '0.3s', rotate: 8 },
+  ];
+
+  const benefits = [
+    { icon: FaTruck, title: "Free Shipping", desc: "On orders over $200" },
+    { icon: FaShieldAlt, title: "Secure Payment", desc: "100% protected" },
+    { icon: FaMedal, title: "Premium Quality", desc: "Platinum silicone" },
+    { icon: FaUndo, title: "Easy Returns", desc: "30-day policy" },
+  ];
+
+  const giftItems = [
+    { icon: FaBirthdayCake, title: "Special Occasions", desc: "Birthdays, anniversaries, and holidays" },
+    { icon: FaUsers, title: "New Mothers", desc: "A comforting companion for new moms" },
+    { icon: FaCube, title: "Collectibles", desc: "Perfect for dedicated collectors" },
+  ];
+
   return (
     <div className="w-full">
-      {/* Hero Section - Syngri Style */}
-      <section className="relative w-full min-h-screen bg-[#050505] text-white overflow-hidden flex items-center mb-4">
-        {/* Abstract Background Elements */}
-        <div className="absolute top-0 right-0 w-3/4 h-full bg-gradient-to-l from-purple-900/20 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-pink-600/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none z-10" />
-
-        {/* Mobile Background Image (Behind Text) */}
-        <div className="absolute inset-0 md:hidden z-0 opacity-40">
-          {heroImages.length > 0 && (
-            <Image
-              src={heroImages[0].imageUrl}
-              alt="Hero Background"
-              fill
-              className="object-cover"
-              priority
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
+      {/* Hero Section - Video/Gradient Background */}
+      <section className="relative w-full min-h-[90vh] overflow-hidden pt-[60px]">
+        {/* Video Background with Fallback */}
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/assets/homehero.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for visibility */}
+          <div className="absolute inset-0 bg-rose-50/50" />
+          
+          {/* Scattered Baby Icons */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <FaBaby className="absolute text-rose-200/40" style={{ top: '8%', left: '3%', fontSize: '35px' }} />
+            <FaBabyCarriage className="absolute text-rose-300/30" style={{ top: '12%', right: '8%', fontSize: '45px' }} />
+            <FaHeart className="absolute text-rose-200/30" style={{ top: '22%', left: '12%', fontSize: '30px' }} />
+            <FaGift className="absolute text-pink-200/30" style={{ top: '30%', right: '18%', fontSize: '40px' }} />
+            <FaBed className="absolute text-rose-200/25" style={{ top: '40%', left: '5%', fontSize: '35px' }} />
+            <FaMitten className="absolute text-rose-300/30" style={{ top: '48%', right: '12%', fontSize: '30px' }} />
+            <FaBaby className="absolute text-pink-200/30" style={{ top: '58%', left: '18%', fontSize: '28px' }} />
+            <FaHeart className="absolute text-rose-200/25" style={{ top: '68%', right: '5%', fontSize: '35px' }} />
+            <FaHands className="absolute text-rose-300/25" style={{ top: '78%', left: '10%', fontSize: '40px' }} />
+            <FaStar className="absolute text-rose-200/30" style={{ top: '3%', right: '25%', fontSize: '22px' }} />
+            <FaStar className="absolute text-pink-200/25" style={{ top: '35%', left: '22%', fontSize: '18px' }} />
+            <FaStar className="absolute text-rose-300/30" style={{ top: '65%', right: '22%', fontSize: '22px' }} />
+            <FaBaby className="absolute text-rose-200/25" style={{ top: '88%', right: '15%', fontSize: '32px' }} />
+            <FaBabyCarriage className="absolute text-pink-200/20" style={{ top: '5%', left: '18%', fontSize: '25px' }} />
+            <FaHeart className="absolute text-rose-300/20" style={{ top: '52%', left: '28%', fontSize: '20px' }} />
+            <FaGift className="absolute text-rose-200/20" style={{ top: '82%', right: '30%', fontSize: '25px' }} />
+            <FaHands className="absolute text-pink-200/20" style={{ top: '15%', left: '30%', fontSize: '20px' }} />
+            <FaStar className="absolute text-rose-200/20" style={{ top: '90%', left: '20%', fontSize: '18px' }} />
+          </div>
         </div>
 
-        <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col md:flex-row items-center gap-12 h-full  md:pt-0">
-          {/* Left Content */}
-          <div className="flex-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm font-medium text-gray-300">New Collection Available</span>
-            </div>
+        {/* Hero Content - Centered on mobile */}
+        <div className="container mx-auto px-4 md:px-12 relative z-10 flex flex-col items-center md:items-start justify-center min-h-[90vh] py-10 md:py-16 text-center md:text-left">
+          <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-4 md:mb-6 tracking-tight text-gray-900 max-w-3xl">
+            Handcrafted with <span className="text-rose-500">Love</span>, 
+            <br />
+            Born to <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500">Touch Hearts</span>
+          </h1>
 
-            <h1 className="text-5xl text-white md:text-7xl font-bold leading-tight mb-6 tracking-tight drop-shadow-lg">
-              Transform your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">nursery</span> into a <br />
-              world of joy.
-            </h1>
+          <p className="text-lg md:text-xl text-gray-700 mb-10 max-w-xl leading-relaxed">
+            Each reborn baby is a masterpiece of artistry, meticulously crafted to bring warmth and joy to your home.
+          </p>
 
-            <p className="text-lg text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto md:mx-0 drop-shadow-md">
-              Discover our handcrafted silicone reborn babies, designed with passion and precision to bring warmth and life to your home.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start mt-6">
-              <Button href="/shop" size="lg" className="bg-pink-600 text-white hover:bg-pink-700 border-none  text-lg font-bold rounded-full min-w-[160px] shadow-lg shadow-pink-600/20">
-                Shop Now
-              </Button>
-              <Button href="/gallery" variant="outline" size="lg" className="border-white/30 text-pink-600 hover:bg-white/10  text-lg font-medium rounded-full min-w-[160px] backdrop-blur-sm">
-                View Gallery
-              </Button>
-            </div>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Button 
+              href="/shop" 
+              size="lg" 
+              className="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white border-none text-lg font-semibold rounded-full px-10 py-4 transition-all hover:scale-105"
+            >
+              Explore Collection
+              <FaArrowRight className="ml-2" />
+            </Button>
+            <Button 
+              href="/gallery" 
+              variant="outline" 
+              size="lg" 
+              className="border-rose-300 text-gray-800 hover:bg-rose-50 text-lg font-medium rounded-full px-10 py-4"
+            >
+              View Gallery
+            </Button>
           </div>
 
-          {/* Right Image (Desktop Only) */}
-          <div className="hidden md:flex flex-1 relative w-full h-[500px] md:h-[700px] items-center justify-center">
-            <div className="relative w-full h-full max-w-lg mx-auto">
-              {/* Main abstract shape/image placeholder */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
-              <div className="relative w-full h-full flex items-center justify-center">
-                <Image
-                  src="/assets/baby1.png"
-                  alt="Reborn Baby"
-                  width={600}
-                  height={800}
-                  className="object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
-                  priority
-                />
+          {/* Stats */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-8 mt-6 md:mt-12">
+            <div className="text-center">
+              <p className="text-2xl md:text-4xl font-bold text-gray-900">150+</p>
+              <p className="text-sm text-gray-600">Happy Families</p>
+            </div>
+            <div className="w-px h-12 bg-rose-300 hidden md:block" />
+            <div className="text-center">
+              <p className="text-2xl md:text-4xl font-bold text-gray-900">8</p>
+              <p className="text-sm text-gray-600">Artisans</p>
+            </div>
+            <div className="w-px h-12 bg-rose-300 hidden md:block" />
+            <div className="text-center">
+              <p className="text-2xl md:text-4xl font-bold text-gray-900">100%</p>
+              <p className="text-sm text-gray-600">Handcrafted</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Bar - Touches Previous Section */}
+      <section className="py-6 bg-white border-y border-rose-100 -mt-1">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center flex-shrink-0">
+                  <benefit.icon className="text-rose-500" />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900 text-sm">{benefit.title}</p>
+                  <p className="text-xs text-gray-500">{benefit.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Creations */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-10 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-rose-50 border border-rose-100 mb-4 md:mb-6">
+              <FaHandSparkles className="text-rose-500 text-xs" />
+              <span className="text-sm font-medium text-rose-600">New Arrivals</span>
+            </div>
+            <h2 className="text-2xl md:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
+              Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500">Creations</span>
+            </h2>
+          </div>
+
+          <div className="flex justify-center">
+            <ProductGrid 
+              products={products} 
+              itemsPerPage={5} 
+              enablePagination={true}
+              title=""
+              showViewAll={true}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Order CTA */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-rose-50 to-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          {[FaGift, FaHeart, FaBaby, FaGem].map((Icon, i) => (
+            <Icon key={i} className="absolute text-rose-200" style={{ 
+              top: `${20 + i * 20}%`, 
+              left: `${10 + i * 20}%`, 
+              fontSize: `${60 + i * 20}px` 
+            }} />
+          ))}
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="w-14 md:w-20 h-14 md:h-20 rounded-full bg-rose-200/50 flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <FaGift className="text-rose-500 text-3xl" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Want Something <span className="text-rose-500">Unique?</span>
+            </h2>
+            <p className="text-gray-600 text-base md:text-lg mb-4 md:mb-8 max-w-xl mx-auto">
+              We offer custom ordering services. Work directly with our artisans to create your perfect reborn baby.
+            </p>
+            <Button 
+              href="/contact"
+              className="bg-gray-900 hover:bg-gray-800 text-white rounded-full px-10 py-4 text-lg"
+            >
+              Request Custom Order
+              <FaArrowRight className="ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Craftsmanship - Image as Full Background */}
+      <section className="py-10 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            alt="Artisan Craftsmanship"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-gray-900/50" />
+        </div>
+
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-rose-500/20 border border-rose-400/30 mb-4 md:mb-6">
+                <FaHandSparkles className="text-rose-400 text-xs" />
+                <span className="text-sm font-medium text-rose-300">The Craft</span>
+              </div>
+              <h2 className="text-2xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                The Art of <br />
+                <span className="text-white">
+                  Reborn Creation
+                </span>
+              </h2>
+              <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-4 md:mb-8 max-w-lg">
+                Each reborn baby is a testament to patience and skill. Our artisans spend countless hours sculpting, painting, and weighting each piece to achieve an unparalleled level of realism.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                {[
+                  "Meticulous hand-sculpting and detailing",
+                  "Premium platinum silicone construction",
+                  "Weighted for authentic baby feel",
+                  "Custom options available on request"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-rose-500/30 flex items-center justify-center">
+                      <FaStar className="text-rose-400 text-xs" />
+                    </div>
+                    <span className="text-gray-200">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button 
+                onClick={() => setProcessModalOpen(true)}
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full px-8 py-3 backdrop-blur-sm"
+              >
+                Learn About Our Process
+                <FaArrowRight className="ml-2" />
+              </Button>
+            </div>
+
+            {/* Creative Organic Shape - No Rectangle */}
+            <div className="flex-1 hidden lg:flex justify-center">
+              <div className="relative w-[320px] h-[380px]">
+                <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/40 to-pink-500/40 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-xl animate-pulse" />
+                <div className="relative w-full h-full bg-rose-100 rounded-[50%_50%_50%_50%/60%_40%_60%_40%] overflow-hidden shadow-2xl border-4 border-white/30 transform rotate-2">
+                  <Image
+                    src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Reborn Baby"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 border-2 border-rose-300 rounded-full" />
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-rose-200/50 rounded-full" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Latest Creations Section */}
-      <div className="w-full">
-        <ProductGrid products={products} itemsPerPage={3} enablePagination={true} />
-      </div>
-
-      {/* About Section */}
-      <div className="max-w-7xl mx-auto px-6">
-        <section className="mb-24 flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <div className="flex-1 w-full md:max-w-[50%] h-[400px] relative rounded-2xl overflow-hidden shadow-lg group">
-            <Image
-              src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Artisan at Work"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
-            <div className="absolute bottom-6 left-6 text-white">
-              <p className="font-serif text-2xl">Masterful Craftsmanship</p>
-            </div>
-          </div>
-          <div className="flex-1 w-full md:max-w-[50%] flex flex-col gap-6">
-            <h2 className="text-left text-4xl font-serif">Crafting Dreams, One Baby at a Time</h2>
-            <p className="text-lg leading-relaxed text-gray-700">
-              At Joanna's Reborns, we pour our heart and soul into every silicone
-              reborn baby. Our artists bring these lifelike creations to being
-              through meticulous sculpting, detailed hand-painting, and precise
-              weighting, ensuring each one is a unique masterpiece.
-            </p>
-            <p className="text-lg leading-relaxed text-gray-700">
-              We are dedicated to providing collectors with unparalleled realism,
-              quality, and an unforgettable experience that goes beyond a mere
-              purchase. Each baby is designed to bring joy and comfort to
-              collectors worldwide.
-            </p>
-            <Button
-              variant="outline"
-              className="w-auto self-start mt-4"
-              onClick={() => setProcessModalOpen(true)}
-            >
-              Learn More About Our Process
-            </Button>
-          </div>
-        </section>
-      </div>
+      {/* Testimonials Marquee */}
+      <TestimonialsMarquee />
 
       {/* Features Section */}
       <FeaturesSection />
 
-      {/* Our Story Section */}
-      <div className="max-w-7xl mx-auto px-6">
-        <section className="mb-24 flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">
-          <div className="flex-1 w-full md:max-w-[50%] flex flex-col gap-6">
-            <h2 className="text-left text-4xl font-serif">Our Story</h2>
-            <p className="text-lg leading-relaxed text-gray-700">
-              Joanna's Reborns was founded on a passion for transforming silicone
-              into breathing works of art. Our journey began with a single
-              artist's dream to create dolls that not only look real but also
-              evoke the same warmth and emotion as a real baby.
+      {/* Gift Guide - Icon Background Cards */}
+      <section className="py-10 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+              The Perfect <span className="text-rose-500">Gift</span>
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              A reborn baby makes a meaningful gift for collectors, new mothers, or anyone who appreciates fine artistry.
             </p>
-            <p className="text-lg leading-relaxed text-gray-700">
-              Over the years, this dream has grown into a collective of dedicated
-              artisans, each bringing their unique talent to craft these precious
-              creations. We pour our heart and soul into every silicone reborn
-              baby, ensuring each one is a unique masterpiece that brings joy and
-              comfort to collectors worldwide.
-            </p>
+          </div>
 
-            <div className={`transition-all duration-500 overflow-hidden ${storyModalOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-              <p className="text-lg leading-relaxed text-gray-700 mb-6">
-                Our commitment to artistry, quality, and integrity guides everything
-                we do. We use only premium, ethically sourced silicone and
-                materials, ensuring that each Reborn baby is safe, durable, and a
-                joy to hold. Every stitch, every brushstroke, every detail is a
-                testament to our dedication to artistry and realism.
-              </p>
-              <p className="text-lg leading-relaxed text-gray-700">
-                Thank you for being a part of our story. We look forward to
-                crafting a piece of art that brings joy and warmth into your life.
-              </p>
-            </div>
-
-            {!storyModalOpen && (
-              <button
-                onClick={() => setStoryModalOpen(true)}
-                className="text-pink-600 font-semibold hover:text-pink-700 self-start underline underline-offset-4"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {giftItems.map((item, index) => (
+              <div 
+                key={index}
+                className="relative overflow-hidden rounded-2xl h-[150px] group bg-rose-100"
               >
-                Read More
-              </button>
-            )}
+                {/* Pink Icon - Top Right */}
+                <div className="absolute top-0 right-0 z-0">
+                  <item.icon className="text-rose-200 text-[100px] -rotate-12 translate-x-5 -translate-y-5" />
+                </div>
+                {/* Content - Centered */}
+                <div className="absolute inset-0 z-10 flex flex-col justify-center items-center p-4 text-center">
+                  <h3 className="text-base font-bold text-gray-900 mb-1">{item.title}</h3>
+                  <p className="text-gray-600 text-xs">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="flex-1 w-full md:max-w-[50%] h-[450px] relative rounded-2xl overflow-hidden shadow-lg group">
-            <Image
-              src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Our Story"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-pink-900/10 mix-blend-multiply" />
+        </div>
+      </section>
+
+      {/* Contact CTA - Full Color - Touches Footer */}
+      <section className="py-20 md:py-24 bg-gradient-to-r from-rose-500 via-rose-400 to-pink-500 relative overflow-hidden mb-auto">
+        <div className="absolute inset-0 opacity-10">
+          {[FaQuestionCircle, FaHeart, FaBaby, FaGift].map((Icon, i) => (
+            <Icon key={i} className="absolute text-white" style={{ 
+              top: `${10 + i * 25}%`, 
+              right: `${5 + i * 20}%`, 
+              fontSize: `${40 + i * 15}px` 
+            }} />
+          ))}
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
+              Have Questions? <span className="text-rose-100">Let's Talk</span>
+            </h2>
+            <p className="text-white/90 text-lg md:text-xl mb-8 md:mb-10 max-w-2xl mx-auto">
+              We'd love to hear from you. Reach out with any questions about our babies or custom orders.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+              <Button 
+                href="/contact" 
+                size="lg" 
+                className="!bg-white !text-gray-900 hover:!bg-gray-100 !border-0 rounded-full px-8 md:px-10 py-3 md:py-4 w-full sm:w-auto"
+              >
+                Contact Us
+                <FaArrowRight className="ml-2" />
+              </Button>
+              <Button 
+                href="/faq" 
+                variant="outline" 
+                size="lg" 
+                className="!border-2 !border-white !text-white hover:!bg-white/20 !bg-transparent rounded-full px-8 md:px-10 py-3 md:py-4 w-full sm:w-auto"
+              >
+                Read FAQ
+              </Button>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      {/* Testimonials Section */}
-      <TestimonialsSection />
-
-      {/* Call to Action Section */}
-      <div className="max-w-7xl mx-auto px-6">
-        <section className="py-16 bg-pink-50 rounded-3xl text-center px-6">
-          <h2 className="text-4xl md:text-5xl font-serif mb-6 text-gray-900">
-            Ready to Find Your Perfect Baby?
-          </h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-            Explore our collection of handcrafted reborn babies and bring home a bundle of joy today.
-          </p>
-          <Button href="/shop" size="lg" className="px-12 py-6 text-lg text-white">
-            View Collection
-          </Button>
-        </section>
-      </div>
-
-      {/* Process Modal */}
       <Modal
         isOpen={processModalOpen}
         onClose={() => setProcessModalOpen(false)}

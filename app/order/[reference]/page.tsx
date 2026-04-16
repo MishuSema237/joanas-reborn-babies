@@ -96,13 +96,13 @@ export default function OrderConfirmationPage() {
           <div className="flex justify-center mb-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/owners-logo/Joannas Reborns Logo.jpg"
-              alt="Joanna's Reborns Logo"
+              src="/assets/owners-logo/my-logo.jpg"
+              alt="Mia Catherine Reborns Logo"
               className="h-24 w-24 object-cover rounded-full"
             />
           </div>
           <h1 className="text-3xl font-bold mb-2">Order Receipt</h1>
-          <p className="text-gray-500">Joanna's Reborns</p>
+          <p className="text-gray-500">Mia Catherine Reborns</p>
         </div>
 
         {/* Order Details */}

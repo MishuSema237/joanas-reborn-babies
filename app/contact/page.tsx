@@ -114,12 +114,12 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="w-full max-w-viewport mx-auto">
+    <div className="w-full max-w-viewport mx-auto pb-20">
       <div className="text-center mb-16">
 
         <h1 className="text-4xl md:text-5xl font-serif mb-4 text-gray-900">Get In Touch</h1>
         <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-          Have a question about Joanna's Reborns or your order? We'd love to
+          Have a question about Mia Catherine Reborns or your order? We'd love to
           hear from you.
         </p>
       </div>
@@ -196,10 +196,10 @@ export default function ContactPage() {
                 <div>
                   <p className="font-semibold text-gray-900 mb-1">Email Us</p>
                   <a
-                    href="mailto:info@joannasreborns.com"
+                    href="mailto:info@miacatherinereborns.com"
                     className="text-gray-600 hover:text-pink-600 transition-colors no-underline"
                   >
-                    info@joannasreborns.com
+                    info@miacatherinereborns.com
                   </a>
                 </div>
               </div>

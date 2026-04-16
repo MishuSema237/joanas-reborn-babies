@@ -22,7 +22,7 @@ interface SendEmailParams {
 export async function sendEmail({ to, subject, html, attachments }: SendEmailParams) {
     try {
         const info = await transporter.sendMail({
-            from: `"${process.env.SMTP_FROM_NAME || 'Joanna\'s Reborns'}" <${process.env.SMTP_USER}>`,
+            from: `"${process.env.SMTP_FROM_NAME || 'Mia Catherine Reborns'}" <${process.env.SMTP_USER}>`,
             to,
             subject,
             html,
@@ -79,13 +79,13 @@ export async function sendContactEmail(data: {
       <p>We have received your message regarding "${data.subject}". We will get back to you as soon as possible.</p>
       <br>
       <p>Best regards,</p>
-      <p>Joanna's Reborns Team</p>
+      <p>Mia Catherine Reborns Team</p>
     `;
 
     try {
         await sendEmail({
             to: data.email,
-            subject: "We received your message - Joanna's Reborns",
+            subject: "We received your message - Mia Catherine Reborns",
             html: generateEmailTemplate(userContent),
         });
         console.log("User confirmation sent");
@@ -111,7 +111,7 @@ export async function sendOrderConfirmationEmail(order: any) {
       <a href="${process.env.NEXT_PUBLIC_SITE_URL}/track-order?ref=${order.orderReference}" class="button">View Order Details</a>
       <br><br>
       <p>Best regards,</p>
-      <p>Joanna's Reborns Team</p>
+      <p>Mia Catherine Reborns Team</p>
     `;
 
     await sendEmail({
@@ -146,7 +146,7 @@ export async function sendOrderUpdateEmail(to: string, subject: string, message:
         ${message.replace(/\n/g, "<br>")}
         <br><br>
         <hr>
-        <p style="font-size: 12px; color: #888;">Joanna's Reborns</p>
+        <p style="font-size: 12px; color: #888;">Mia Catherine Reborns</p>
       </div>
     `;
 

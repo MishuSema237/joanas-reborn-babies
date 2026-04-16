@@ -1,5 +1,5 @@
 export function generateEmailTemplate(content: string) {
-  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/assets/owners-logo/Joannas Reborns Logo.jpg`;
+  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/assets/owners-logo/my-logo.jpg`;
   const primaryColor = "#f08ba8";
 
   return `
@@ -8,7 +8,7 @@ export function generateEmailTemplate(content: string) {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Joanna's Reborns</title>
+      <title>Mia Catherine Reborns</title>
       <style>
         body {
           font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -85,16 +85,16 @@ export function generateEmailTemplate(content: string) {
       <div style="padding: 20px 0;">
         <div class="container">
           <div class="header">
-            <img src="${logoUrl}" alt="Joanna's Reborns" class="logo">
+            <img src="${logoUrl}" alt="Mia Catherine Reborns" class="logo">
           </div>
           <div class="content">
             ${content}
           </div>
           <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Joanna's Reborns. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} Mia Catherine Reborns. All rights reserved.</p>
             <p>
               <a href="${process.env.NEXT_PUBLIC_SITE_URL}">Visit Website</a> | 
-              <a href="mailto:info@joannasreborns.com">Contact Us</a>
+              <a href="mailto:info@miacatherinereborns.com">Contact Us</a>
             </p>
           </div>
         </div>

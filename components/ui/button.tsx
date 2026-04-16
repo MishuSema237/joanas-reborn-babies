@@ -34,10 +34,10 @@ export function Button({
   };
 
   const sizeClasses = {
-    default: "h-12 px-6 text-base",
-    sm: "h-9 px-3 text-sm",
-    lg: "h-14 px-8 text-lg",
-    icon: "h-10 w-10",
+    default: "h-10 md:h-12 px-6 md:px-6 text-sm md:text-base",
+    sm: "h-8 md:h-9 px-3 md:px-3 text-sm md:text-sm",
+    lg: "h-12 md:h-14 px-8 md:px-8 text-base md:text-lg",
+    icon: "h-10 md:h-10 w-10 md:w-10",
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;

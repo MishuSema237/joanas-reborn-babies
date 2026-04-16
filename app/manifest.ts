@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: "Joanna's Reborns",
-        short_name: "Joanna's Reborns",
-        description: "Handcrafted silicone reborn babies designed with passion and precision.",
+        name: "Mia Catherine Reborns",
+        short_name: "Mia Catherine Reborns",
+        description: "Premium handcrafted silicone reborn baby dolls. Medical-grade platinum silicone, artisan-crafted realism, weighted for authentic feel.",
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',

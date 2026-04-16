@@ -198,7 +198,7 @@ export default function OrderPage() {
   };
 
   return (
-    <div className="w-full max-w-viewport mx-auto">
+    <div className="w-full max-w-viewport mx-auto pb-20">
       <h1 className="mb-12">Your Order Request</h1>
 
       <form onSubmit={handleSubmit}>

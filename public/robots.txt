@@ -1,0 +1,38 @@
+# Mia Catherine Reborns - Robots.txt
+# Optimized for maximum SEO indexing
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.miacatherinereborns.com/sitemap.xml
+Sitemap: https://www.miacatherinereborns.com/sitemap-products.xml
+Sitemap: https://www.miacatherinereborns.com/sitemap-images.xml
+
+# Crawl-delay for server-friendly crawling
+Crawl-delay: 1
+
+# Block admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /assets/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order/
+
+# Enhanced SEO Directives
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Googlebot-Mobile
+Allow: /
+User-agent: AdsBot-Google
+Allow: /
+User-agent: Mediabot
+Allow: /
+User-agent: Applebot
+Allow: /

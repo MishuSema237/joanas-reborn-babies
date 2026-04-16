@@ -39,7 +39,7 @@ export default function FAQPage() {
         {
             _id: "6",
             question: "Do they come with a birth certificate?",
-            answer: "Yes, every Joanna's Reborn baby comes with a beautiful birth certificate and a certificate of authenticity, making your adoption official."
+            answer: "Yes, every Mia Catherine Reborn baby comes with a beautiful birth certificate and a certificate of authenticity, making your adoption official."
         },
         {
             _id: "7",
