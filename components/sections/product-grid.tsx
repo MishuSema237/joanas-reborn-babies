@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProductCard } from "@/components/ui/product-card";
 import { Button } from "@/components/ui/button";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -32,6 +32,10 @@ export function ProductGrid({
   mobileLayout = "carousel",
 }: ProductGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   const ITEMS_PER_PAGE = itemsPerPage || 30;
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);

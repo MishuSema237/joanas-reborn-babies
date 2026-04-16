@@ -186,46 +186,46 @@ export default function ContactPage() {
 
         {/* Contact Information */}
         <div className="lg:col-span-5 space-y-8">
-          <div className="bg-gradient-to-br from-pink-50 to-white p-8 rounded-2xl border border-pink-100 shadow-sm">
-            <h3 className="text-2xl font-serif mb-6 text-gray-800">Contact Information</h3>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 group">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform">
-                  <FaEnvelope />
+          <div className="bg-gradient-to-br from-pink-50 to-white p-6 md:p-8 rounded-2xl border border-pink-100 shadow-sm">
+            <h3 className="text-xl md:text-2xl font-serif mb-4 md:mb-6 text-gray-800">Contact Information</h3>
+            <div className="space-y-4 md:space-y-6">
+              <div className="flex items-start gap-3 md:gap-4 group">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                  <FaEnvelope className="text-lg md:text-xl" />
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">Email Us</p>
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Email Us</p>
                   <a
                     href="mailto:info@miacatherinereborns.com"
-                    className="text-gray-600 hover:text-pink-600 transition-colors no-underline"
+                    className="text-gray-600 hover:text-pink-600 transition-colors no-underline text-sm md:text-base break-all"
                   >
                     info@miacatherinereborns.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 group">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform">
-                  <FaPhone />
+              <div className="flex items-start gap-3 md:gap-4 group">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                  <FaPhone className="text-lg md:text-xl" />
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">Call Us</p>
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Call Us</p>
                   <a
                     href="tel:+15551234567"
-                    className="text-gray-600 hover:text-pink-600 transition-colors no-underline"
+                    className="text-gray-600 hover:text-pink-600 transition-colors no-underline text-sm md:text-base"
                   >
                     +1 (555) 123-4567
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 group">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform">
-                  <FaMapMarkerAlt />
+              <div className="flex items-start gap-3 md:gap-4 group">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                  <FaMapMarkerAlt className="text-lg md:text-xl" />
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">Visit Us</p>
-                  <p className="text-gray-600 mb-0">
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Visit Us</p>
+                  <p className="text-gray-600 mb-0 text-sm md:text-base">
                     123 Artisan Lane<br />
                     Craftville, CA 90210
                   </p>
