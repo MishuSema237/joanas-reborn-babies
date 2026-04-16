@@ -184,7 +184,7 @@ export default function Home() {
             <ProductGrid 
               products={products} 
               itemsPerPage={5} 
-              enablePagination={true}
+              enablePagination={false}
               title=""
               showViewAll={true}
             />
