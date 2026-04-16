@@ -101,7 +101,7 @@ export function ProductGrid({
           <div className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-4 pt-2 scrollbar-hide -mx-4 px-4">
             <div className="flex">
               {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
-                <div key={product._id || product.id} className="snap-center shrink-0 w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px]">
+                <div key={product._id || product.id} className="snap-center shrink-0 w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] mr-3 md:mr-4">
                   <ProductCard
                     id={product._id || product.id || ""}
                     name={product.name}
