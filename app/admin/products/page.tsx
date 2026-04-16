@@ -114,9 +114,10 @@ export default function ManageProductsPage() {
                     const values = line.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g) || [];
                     const obj: any = {};
                     headers.forEach((h, i) => {
-                        let val = values[i]?.trim().replace(/^"|"$/g, '') || '';
-                        if (h === 'price') val = parseFloat(val) || 0;
-                        if (h === 'testimonial') {
+                        const val = values[i]?.trim().replace(/^"|"$/g, '') || '';
+                        if (h === 'price') {
+                            obj[h] = parseFloat(val) || 0;
+                        } else if (h === 'testimonial') {
                             try { obj.testimonial = JSON.parse(val); } catch { obj.testimonial = {}; }
                         } else if (h === 'images') {
                             try { obj.images = JSON.parse(val); } catch { obj.images = []; }
