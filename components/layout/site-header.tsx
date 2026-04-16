@@ -55,9 +55,9 @@ export default function SiteHeader() {
           <Link
             key={link.href}
             href={link.href}
-            className={`text-base font-medium no-underline px-1 py-0 transition-colors rounded ${textColor} ${hoverColor} ${isActive(link.href)
-              ? `font-bold border-b-2 ${activeBorder} pb-0.5 ${activeColor}`
-              : ""
+            className={`text-base font-medium no-underline px-1 py-0 transition-colors rounded hover:text-rose-600 ${isActive(link.href)
+              ? "font-bold border-b-2 border-rose-500 pb-0.5 text-rose-600"
+              : "text-gray-900"
               }`}
           >
             {link.label}
@@ -70,7 +70,7 @@ export default function SiteHeader() {
         <Link
           href="/cart"
           aria-label="Shopping cart"
-          className={`text-xl hover:text-gray-500 no-underline relative z-20 ${textColor}`}
+          className="text-xl hover:text-rose-600 no-underline relative z-20 text-gray-900"
         >
           <FaShoppingCart />
           {itemCount > 0 && (
