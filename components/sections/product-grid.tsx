@@ -126,7 +126,7 @@ export function ProductGrid({
                 typeof page === 'number' ? (
                   <Button
                     key={idx}
-                    variant={page === currentPage ? "default" : "outline"}
+                    variant={page === currentPage ? "solid" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(page)}
                     className={`w-8 h-8 p-0 text-xs rounded-full ${
