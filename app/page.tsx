@@ -187,6 +187,7 @@ export default function Home() {
               enablePagination={false}
               title=""
               showViewAll={true}
+              mobileLayout="carousel"
             />
           </div>
         </div>
