@@ -34,7 +34,10 @@ export function ProductGrid({
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const gridRef = document.getElementById('product-grid');
+    if (gridRef) {
+      gridRef.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }, [currentPage]);
 
   const ITEMS_PER_PAGE = itemsPerPage || 30;
@@ -82,7 +85,7 @@ export function ProductGrid({
         )}
 
         {isGrid && (
-          <div className="grid grid-cols-1 min-[240px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 mb-10">
+          <div id="product-grid" className="grid grid-cols-1 min-[240px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 mb-10">
             {currentProducts.map((product) => (
               <ProductCard
                 key={product._id || product.id}
