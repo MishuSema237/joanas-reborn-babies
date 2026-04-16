@@ -180,8 +180,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex justify-center">
-            <ProductGrid 
+          <ProductGrid 
               products={products} 
               itemsPerPage={5} 
               enablePagination={false}
@@ -189,7 +188,6 @@ export default function Home() {
               showViewAll={true}
               mobileLayout="carousel"
             />
-          </div>
         </div>
       </section>
 

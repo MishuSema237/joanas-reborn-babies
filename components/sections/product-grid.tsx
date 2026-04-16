@@ -73,8 +73,8 @@ export function ProductGrid({
   };
 
   return (
-    <section className="mb-8">
-      <div className="container px-2 md:px-4">
+    <section className="mb-8 overflow-visible">
+      <div className="container px-2 md:px-4 overflow-visible">
         {title && (
           <h2 className="text-center mb-8 md:mb-12 text-2xl md:text-3xl font-bold text-gray-900">{title}</h2>
         )}
@@ -96,9 +96,10 @@ export function ProductGrid({
           </div>
         ) : (
           /* Horizontal Scroll - For homepage carousel */
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-6 px-2 md:px-4 w-full min-w-0 scrollbar-hide">
-            {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
-              <div key={product._id || product.id} className="snap-center shrink-0 w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
+          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-2 sm:gap-3 pb-4 pt-2 w-full scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex flex-nowrap">
+              {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
+                <div key={product._id || product.id} className="snap-center shrink-0 w-[130px] xs:w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
                 <ProductCard
                   id={product._id || product.id || ""}
                   name={product.name}
