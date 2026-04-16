@@ -75,8 +75,8 @@ export function ProductGrid({
   const isGrid = mobileLayout === "grid";
   
   return (
-    <section className="mb-8">
-      <div className="container px-2 md:px-4">
+    <section className="mb-8 w-full">
+      <div className="w-full px-0">
         {title && (
           <h2 className="text-center mb-8 md:mb-12 text-2xl md:text-3xl font-bold text-gray-900">{title}</h2>
         )}
@@ -98,10 +98,10 @@ export function ProductGrid({
         )}
 
         {!isGrid && (
-          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-4 pt-2 w-full scrollbar-hide">
-            <div className="flex flex-nowrap">
+          <div className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-4 pt-2 scrollbar-hide -mx-4 px-4">
+            <div className="flex">
               {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
-                <div key={product._id || product.id} className="snap-center shrink-0 w-[130px] xs:w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px] px-2.5">
+                <div key={product._id || product.id} className="snap-center shrink-0 w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px]">
                   <ProductCard
                     id={product._id || product.id || ""}
                     name={product.name}
