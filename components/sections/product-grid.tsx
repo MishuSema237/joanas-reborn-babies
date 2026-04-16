@@ -96,9 +96,9 @@ export function ProductGrid({
           </div>
         ) : (
           /* Horizontal Scroll - For homepage carousel */
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-6 px-2 scrollbar-hide">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-6 px-2 md:px-4 w-full min-w-0 scrollbar-hide">
             {products.slice(0, enablePagination ? itemsPerPage * totalPages : undefined).map((product) => (
-              <div key={product._id || product.id} className="snap-center shrink-0 w-[160px] sm:w-[180px] md:w-[200px]">
+              <div key={product._id || product.id} className="snap-center shrink-0 w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
                 <ProductCard
                   id={product._id || product.id || ""}
                   name={product.name}
