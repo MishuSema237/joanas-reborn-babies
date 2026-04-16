@@ -171,7 +171,9 @@ export function ShopClient({ initialProducts }: ShopClientProps) {
 
             {/* Results */}
             {filteredProducts.length > 0 ? (
-                <ProductGrid products={filteredProducts} showViewAll={false} mobileLayout="grid" enablePagination={true} />
+              <div className="flex justify-center">
+                <ProductGrid products={filteredProducts} showViewAll={false} mobileLayout="grid" enablePagination={true} itemsPerPage={15} />
+              </div>
             ) : (
                 <div className="text-center py-24 bg-gray-50 rounded-xl border border-dashed border-gray-200">
                     <div className="text-gray-300 text-6xl mb-4 flex justify-center">
